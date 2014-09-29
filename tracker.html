@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="en">
+    
+    <head>
+        <meta charset="utf-8">
+        <title>TI3</title>
+        <meta name="description" content="TI3">
+        <meta name="author" content="SitePoint">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="application/javascript" src="http://jqueryrotate.googlecode.com/svn/trunk/jQueryRotate.js"></script>
+        <link rel="stylesheet" href="stylesheets/tracker.css">
+        <script type="text/javascript" src="javascripts/tracker.js"></script>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <!-- <link href="assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
+        <link rel="stylesheet" type="text/css" href="stylesheets/bootstrap-colorselector.css" />
+        <script src="javascripts/bootstrap-colorselector.js"></script>
+        <script src="javascripts/load-data.js"></script>
+        <script src="javascripts/save-data.js"></script>
+        <script src="javascripts/settings.js"></script>
+        <!--[if lt IE 9]>
+            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+    </head>
+    
+    <body>
+        <ul class="nav nav-tabs" id="myTab">
+            <li class="active"><a href="#players-tab" data-toggle="tab">Players</a>
+
+            </li>
+            <li><a href="#turn-tracker" data-toggle="tab">Turn Tracker</a>
+
+            </li>
+            <li><a href="#messages" data-toggle="tab">Technology</a>
+
+            </li>
+            <li><a href="#video" data-toggle="tab">Video Diaries</a>
+
+            </li>
+            <li><a href="#settings" data-toggle="tab">Settings</a>
+
+            </li>
+            <button class="btn btn-primary" id="save-btn" type="submit" data-loading-text="Saving...">Save</button>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="players-tab">
+                <form id="form" name="form">
+                    <table id="player-table" class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Player</th>
+                                <th>Color</th>
+                                <th>Name</th>
+                                <th>Great Race</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="responsecontainer"></tbody>
+                        <!-- load-data.js outputs html here -->
+                    </table>
+                </form>
+                <input id="add-player" class="btn btn-primary" onclick="addPlayer()" type="button" value="Add Player">
+            </div>
+            <div class="tab-pane" id="turn-tracker">
+                <div class="pieContainer">
+                    <div class="pieBackground"></div>
+                    <div id="strategy-1" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <div id="strategy-2" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <div id="strategy-3" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <div id="strategy-4" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <div id="strategy-5" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <div id="strategy-6" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <div id="strategy-7" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <div id="strategy-8" class="hold">
+                        <div class="pie"></div>
+                    </div>
+                    <img id="needle" src="images/turn_tracker/turn_needle.png">
+                </div>
+                <input class="btn btn-primary" id="prev-btn" onclick="previousStrategy()" type="button" value="Previous">
+                <input class="btn btn-primary" id="next-btn" onclick="nextStrategy()" type="button" value="Next">
+            </div>
+            <div class="tab-pane" id="messages">...</div>
+            <!-- Begin Settings Tab -->
+            <div class="tab-pane" id="settings">
+                <br>
+                <div class="alert alert-info"><strong>Select a subsection to view the settings. Click Save to save changes.</strong>
+
+                </div>
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h4 class="panel-title">
+        <button id="setting-expansions" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+          Expansions <i style="float:right;" class="glyphicon glyphicon-chevron-down"></i>
+        </button>
+      </h4>
+
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="well"><strong>Select which Twilight Imperium 3 expansions you would like to enable.</strong>
+
+                                </div>
+                                <div class="row-fluid">
+                                    <div style="margin-right: 25px; float: left; width:330px;" class="thumbnail">
+                                        <img src="images/settings/settings_SE.jpg">
+                                        <div class="caption">
+                                             <h3 align="center">Shattered Empire</h3>
+
+                                            <p>The first expansion features four new races, more balanced Strategy cards, more belligerent Objective cards, several new surprises for neutral planets, 7-8 player support, rules (with more than a dozen new optional variants), and enough additional systems for a fourth ring around Mecatol Rex.</p>
+                                            <p align="center"><a id="setting-se" style="width: 100%;" class="btn btn-danger">Disabled</a>
+
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-right: 25px; float: left; width:330px;" class="thumbnail">
+                                    <img src="images/settings/settings_SotT.jpg">
+                                    <div class="caption">
+                                         <h3 align="center">Shards of the Throne</h3>
+
+                                        <p>This expansion adds 3 new races: The Arborec, The Ghosts of Creuss, and The Nekro Virus. It also includes an all-new scenario in which one player controls the legendary Lazax Empire. It has new rules options including Mercenaries, Representatives, Mechanized Units, and Flagships.</p>
+                                        <p align="center"><a id="setting-sott" style="width: 100%;" class="btn btn-danger">Disabled</a>
+
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h4 class="panel-title">
+        <button id="setting-strategy" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+          Strategy Cards <i style="float:right;" class="glyphicon glyphicon-chevron-down"></i>
+        </button>
+      </h4>
+
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div id="sc-no-expansions" class="alert"><strong>Enable an expansion to see alternative strategy cards.</strong>
+
+                                </div>
+                                <div class="card-1">
+                                    <div id="myCarousel-1" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators seSimple">
+                                            <li data-target="#myCarousel-1" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel-1" data-slide-to="1"></li>
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #AA4242;" class="active item">
+                                                 <h2 style="color: #943939; font-size: 180px; margin: 0; padding-top: 90px;">1</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Initiative</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div style="background: #AA4242;" class="item">
+                                                 <h2 style="color: #943939; font-size: 180px; margin: 0; padding-top: 90px;">1</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Leadership</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left seSimple" href="#myCarousel-1" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right seSimple" href="#myCarousel-1" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                                <div class="card-2">
+                                    <div id="myCarousel-2" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators seSimple">
+                                            <li data-target="#myCarousel-2" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel-2" data-slide-to="1"></li>
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #E06E38;" class="active item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #CC6433;; font-size: 180px;">2</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Diplomacy</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div style="background: #E06E38;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #CC6433; font-size: 180px;">2</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Diplomacy II</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left seSimple" href="#myCarousel-2" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right seSimple" href="#myCarousel-2" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                                <div class="card-3">
+                                    <div id="myCarousel-3" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators bothDisable">
+                                            <li data-target="#myCarousel-3" data-slide-to="0" class="active"></li>
+                                            <li id="sottIndicator3-1" class="sottComplex" data-target="#myCarousel-3" data-slide-to="1"></li>
+                                            <!-- SotT -->
+                                            <li id="sottIndicator3Disable" class="seComplex" data-target="#myCarousel-3" data-slide-to="2"></li>
+                                            <!-- SE -->
+                                            <li id="sottIndicator3-2" class="sottComplex" data-target="#myCarousel-3" data-slide-to="3"></li>
+                                            <!-- SotT -->
+                                            <li id="sottIndicator3-3" class="sottComplex" data-target="#myCarousel-3" data-slide-to="4"></li>
+                                            <!-- SotT -->
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #DDD400;" class="active item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #CEC500; font-size: 180px;">3</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Political</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div id="sottDisableSlide3-1" style="background: #DDD400;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #CEC500; font-size: 180px;">3</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Political II</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                            <div id="seDisableSlide3" style="background: #DDD400;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #CEC500; font-size: 180px;">3</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Assembly</h3>
+
+                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                </div>
+                                            </div>
+                                            <div id="sottDisableSlide3-2" style="background: #DDD400;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #CEC500; font-size: 180px;">3</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Assembly II</h3>
+
+                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                </div>
+                                            </div>
+                                            <div id="sottDisableSlide3-3" style="background: #DDD400;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #CEC500; font-size: 180px;">3</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Civilization</h3>
+
+                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left bothDisable" href="#myCarousel-3" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right bothDisable" href="#myCarousel-3" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                                <div class="card-4">
+                                    <div id="myCarousel-4" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators seSimple">
+                                            <li data-target="#myCarousel-4" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel-4" data-slide-to="1"></li>
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #214B23;" class="active item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #1C3F1E; font-size: 180px;">4</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Logistics</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div style="background: #214B23;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #1C3F1E; font-size: 180px;">4</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Production</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left seSimple" href="#myCarousel-4" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right seSimple" href="#myCarousel-4" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                                <div class="card-5">
+                                    <div id="myCarousel-5" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators bothDisable">
+                                            <li data-target="#myCarousel-5" data-slide-to="0" class="active"></li>
+                                            <li id="sottIndicator5Disable" class="seComplex" data-target="#myCarousel-5" data-slide-to="1"></li>
+                                            <!-- SE -->
+                                            <li id="sottIndicator5" class="sottComplex" data-target="#myCarousel-5" data-slide-to="2"></li>
+                                            <!-- SotT -->
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #3D9748;" class="active item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #378A41; font-size: 180px;">5</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Trade</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div id="seDisableSlide5" style="background: #3D9748;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #378A41; font-size: 180px;">5</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Trade II</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                            <div id="sottDisableSlide5-1" style="background: #3D9748;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #378A41; font-size: 180px;">5</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Trade III</h3>
+
+                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left bothDisable" href="#myCarousel-5" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right bothDisable" href="#myCarousel-5" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                                <div class="card-6">
+                                    <div id="myCarousel-6" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators seSimple">
+                                            <li data-target="#myCarousel-6" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel-6" data-slide-to="1"></li>
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #32948C;" class="active item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #2C8881; font-size: 180px;">6</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Warfare</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div style="background: #32948C;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #2C8881; font-size: 180px;">6</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Warfare II</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left seSimple" href="#myCarousel-6" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right seSimple" href="#myCarousel-6" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                                <div class="card-7">
+                                    <div id="myCarousel-7" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators seSimple">
+                                            <li data-target="#myCarousel-7" data-slide-to="0" class="active"></li>
+                                            <li data-target="#myCarousel-7" data-slide-to="1"></li>
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #224983;" class="active item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #1D3F72; font-size: 180px;">7</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Technology</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div style="background: #224983;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #1D3F72; font-size: 180px;">7</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Technology II</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left seSimple" href="#myCarousel-7" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right seSimple" href="#myCarousel-7" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                                <div class="card-8">
+                                    <div id="myCarousel-8" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators bothDisable">
+                                            <li data-target="#myCarousel-8" data-slide-to="0" class="active"></li>
+                                            <li id="sottIndicator8Disable-1" class="seComplex" data-target="#myCarousel-8" data-slide-to="1"></li>
+                                            <!-- SE -->
+                                            <li id="sottIndicator8Disable-2" class="seComplex" data-target="#myCarousel-8" data-slide-to="2"></li>
+                                            <!-- SE -->
+                                            <li id="seIndicator8" class="sottComplex" data-target="#myCarousel-8" data-slide-to="3"></li>
+                                            <!-- SotT -->
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #543969;" class="active item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #4B335E; font-size: 180px;">8</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Imperial</h3>
+
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                                                </div>
+                                            </div>
+                                            <div id="seDisableSlide8-1" style="background: #543969;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #4B335E; font-size: 180px;">8</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Imperial II</h3>
+
+                                                    <p>Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
+                                                </div>
+                                            </div>
+                                            <div id="seDisableSlide8-2" style="background: #543969;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px;  color: #4B335E; font-size: 180px;">8</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 16px;">Bureaucracy</h3>
+
+                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                </div>
+                                            </div>
+                                            <div id="sottDisableSlide8-1" style="background: #543969;" class="item">
+                                                 <h2 style="margin: 0; padding-top: 90px; color: #4B335E; font-size: 180px;">8</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">Industry</h3>
+
+                                                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left bothDisable" href="#myCarousel-8" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right bothDisable" href="#myCarousel-8" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                             <h4 class="panel-title">
+        <button id="setting-race" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+          Race Randomization <i style="float:right;" class="glyphicon glyphicon-chevron-down"></i>
+        </button>
+      </h4>
+
+                        </div>
+                        <div id="collapseThree" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <div class="well">You can toggle races on and off by clicking them below.</div>
+
+                                <div id="base-game-races" class="race-row">
+
+                                     <h3>Base Game Races</h3>
+                                    <br>
+                                    <div class="race-item">
+                                        <div id="letnev" class="race-image">
+                                        
+                                        <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Barony<br>of Letnev</strong>
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="race-item">
+                                        <div id="hacan" class="race-image">
+
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Emirates<br>of Hacan</strong>
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="race-item">
+                                     
+                                        <div id="sol" class="race-image">
+                                        
+                                        <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Federation<br>of Sol</strong>
+                                        </div>
+                                        </div>
+                                     
+                                    </div>
+
+
+                                    <div class="race-item">
+                                     
+                                        <div id="l1z1x" class="race-image">
+                                        
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The L1Z1X<br>Mindnet</strong>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="race-item">
+                                      
+                                        <div id="mentak" class="race-image">
+
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Mentak Coalition</strong>
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="race-item">
+                                      
+                                        <div id="naalu" class="race-image">
+
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Naalu Collective</strong>
+                                        </div>
+                                        </div>
+                                    
+                                    </div>
+
+
+                                    <div class="race-item">
+                                      
+                                        <div id="sardakk" class="race-image">
+                                        
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Sardakk<br>N'orr</strong>
+                                        </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="race-item">
+                                      
+                                        <div id="jol_nar" class="race-image">
+                                        
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Universities<br>of Jol-Nar</strong>
+                                        </div>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="race-item">
+                                      
+                                        <div id="xxcha" class="race-image">
+                                        
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Xxcha<br>Kingdom</strong>
+                                        </div>
+                                        </div>
+                                      
+                                    </div>
+
+
+                                    <div class="race-item">
+                                      
+                                        <div id="yssaril" class="race-image">
+
+                                          <br><br><br><br><br><br>
+
+                                        <div class="race-name">
+                                          <strong>The Yssaril<br>Tribes</strong>
+                                        </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div id="se-races" class="race-row">
+                                    <hr style="margin-top:30px;">
+                                     <h3>Shattered Empire Races</h3>
+                                    <br>
+                                    <div class="race-item"><a class="race-toggle"><div id="saar" class="race-image"></div><div class="race-name"><strong>The Clan<br>of Saar</strong></div></a>
+                                    </div>
+                                    <div class="race-item"><a class="race-toggle"><div id="muaat" class="race-image"></div><div class="race-name"><strong>The Embers<br>of Muaat</strong></div></a>
+                                    </div>
+                                    <div class="race-item"><a class="race-toggle"><div id="winnu" class="race-image"></div><div class="race-name"><strong>The Winnu</strong></div></a>
+                                    </div>
+                                    <div class="race-item"><a class="race-toggle"><div id="yin" class="race-image"></div><div class="race-name"><strong>The Yin<br>Brotherhood</strong></div></a>
+                                    </div>
+                                </div>
+                                <div id="sott-races" class="race-row">
+                                    <hr style="margin-top:30px;">
+                                     <h3>Shards of the Throne Races</h3>
+                                    <br>
+                                    <div class="race-item"><a class="race-toggle"><div id="arborec" class="race-image"></div><div class="race-name"><strong>The Arborec</strong></div></a>
+                                    </div>
+                                    <div class="race-item"><a class="race-toggle"><div id="creuss" class="race-image"></div><div class="race-name"><strong>The Ghosts<br>of Creuss</strong></div></a>
+                                    </div>
+                                    <div class="race-item"><a class="race-toggle"><div id="nekro" class="race-image"></div><div class="race-name"><strong>The Nekro<br>Virus</strong></div></a>
+                                    </div>
+                                    <div class="race-item"><a class="race-toggle"><div id="lazax" class="race-image"></div><div style="margin-left: 45px;" class="race-name"><strong>The Lazax</strong></div></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </body>
+
+</html>
