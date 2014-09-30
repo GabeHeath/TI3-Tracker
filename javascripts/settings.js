@@ -5,7 +5,6 @@ function chevronClick(){
 
 	if ($(className).attr('class') == 'glyphicon glyphicon-chevron-down') {
 		$(className).attr('class','glyphicon glyphicon-chevron-up');
-		console.log($(className).attr('class', 'glyphicon glyphicon-chevron-up'));
 	} else {
 		$(className).attr('class','glyphicon glyphicon-chevron-down');
 	}
@@ -43,7 +42,6 @@ function toggleExpansions(e){
 			$(this).text('Enabled');
 			$(this).attr('class', 'btn btn-success');
 		} else { // else disabled
-			console.log('please no');
 			sottEnabled = 0;
 			$(this).text('Disabled');
 			$(this).attr('class', 'btn btn-danger');
@@ -221,24 +219,38 @@ function resetStrategyCards() {
 }
 
 
-var letnevEnabled = 0;
-var hacanEnabled = 0;
-var solEnabled = 0;
-var l1z1xEnabled = 0;
-var mentakEnabled = 0;
-var naaluEnabled = 0;
-var sardakkEnabled = 0;
-var jol_narEnabled = 0;
-var xxchaEnabled = 0;
-var yssarilEnabled = 0;
+var letnevDisabled = 0;
+var hacanDisabled = 0;
+var solDisabled = 0;
+var l1z1xDisabled = 0;
+var mentakDisabled = 0;
+var naaluDisabled = 0;
+var sardakkDisabled = 0;
+var jol_narDisabled = 0;
+var xxchaDisabled = 0;
+var yssarilDisabled = 0;
+var saarDisabled = 0;
+var muaatDisabled = 0;
+var winnuDisabled = 0;
+var yinDisabled = 0;
+var arborecDisabled = 0;
+var creussDisabled = 0;
+var nekroDisabled = 0;
+var lazaxDisabled = 1;
 
 $(function() {
+//Setup data check at the bottom of this function
+var raceArray = ['letnev', 'hacan', 'sol', 'l1z1x', 'mentak', 'naalu', 'sardakk',
+'jol_nar', 'xxcha', 'yssaril', 'saar', 'muaat', 'winnu', 'yin', 'arborec',
+'creuss', 'nekro', 'lazax'];
+
+
 	$('#letnev').click(function() {
-		if (letnevEnabled == 0) {
-			letnevEnabled = 1;
+		if (letnevDisabled == 0) {
+			letnevDisabled = 1;
 			raceBgPosition('#letnev', 120);
 		} else {
-			letnevEnabled = 0;
+			letnevDisabled = 0;
 			raceBgPosition('#letnev', 0);
 		}
 		//save to database code here ...
@@ -246,11 +258,11 @@ $(function() {
 	})
 
 	$('#hacan').click(function() {
-		if (hacanEnabled == 0) {
-			hacanEnabled = 1;
+		if (hacanDisabled == 0) {
+			hacanDisabled = 1;
 			raceBgPosition('#hacan', 120);
 		} else {
-			hacanEnabled = 0;
+			hacanDisabled = 0;
 			raceBgPosition('#hacan', 0);
 		}
 		//save to database code here ...
@@ -258,11 +270,11 @@ $(function() {
 	})
 
 	$('#sol').click(function() {
-		if (solEnabled == 0) {
-			solEnabled = 1;
+		if (solDisabled == 0) {
+			solDisabled = 1;
 			raceBgPosition('#sol', 120);
 		} else {
-			solEnabled = 0;
+			solDisabled = 0;
 			raceBgPosition('#sol', 0);
 		}
 		//save to database code here ...
@@ -270,11 +282,11 @@ $(function() {
 	})
 
 	$('#l1z1x').click(function() {
-		if (l1z1xEnabled == 0) {
-			l1z1xEnabled = 1;
+		if (l1z1xDisabled == 0) {
+			l1z1xDisabled = 1;
 			raceBgPosition('#l1z1x', 120);
 		} else {
-			l1z1xEnabled = 0;
+			l1z1xDisabled = 0;
 			raceBgPosition('#l1z1x', 0);
 		}
 		//save to database code here ...
@@ -282,11 +294,11 @@ $(function() {
 	})
 
 	$('#mentak').click(function() {
-		if (mentakEnabled == 0) {
-			mentakEnabled = 1;
+		if (mentakDisabled == 0) {
+			mentakDisabled = 1;
 			raceBgPosition('#mentak', 120);
 		} else {
-			mentakEnabled = 0;
+			mentakDisabled = 0;
 			raceBgPosition('#mentak', 0);
 		}
 		//save to database code here ...
@@ -294,11 +306,11 @@ $(function() {
 	})
 
 	$('#naalu').click(function() {
-		if (naaluEnabled == 0) {
-			naaluEnabled = 1;
+		if (naaluDisabled == 0) {
+			naaluDisabled = 1;
 			raceBgPosition('#naalu', 120);
 		} else {
-			naaluEnabled = 0;
+			naaluDisabled = 0;
 			raceBgPosition('#naalu', 0);
 		}
 		//save to database code here ...
@@ -306,11 +318,11 @@ $(function() {
 	})
 
 	$('#sardakk').click(function() {
-		if (sardakkEnabled == 0) {
-			sardakkEnabled = 1;
+		if (sardakkDisabled == 0) {
+			sardakkDisabled = 1;
 			raceBgPosition('#sardakk', 120);
 		} else {
-			sardakkEnabled = 0;
+			sardakkDisabled = 0;
 			raceBgPosition('#sardakk', 0);
 		}
 		//save to database code here ...
@@ -318,11 +330,11 @@ $(function() {
 	})
 
 	$('#jol_nar').click(function() {
-		if (jol_narEnabled == 0) {
-			jol_narEnabled = 1;
+		if (jol_narDisabled == 0) {
+			jol_narDisabled = 1;
 			raceBgPosition('#jol_nar', 120);
 		} else {
-			jol_narEnabled = 0;
+			jol_narDisabled = 0;
 			raceBgPosition('#jol_nar', 0);
 		}
 		//save to database code here ...
@@ -330,11 +342,11 @@ $(function() {
 	})
 
 	$('#xxcha').click(function() {
-		if (xxchaEnabled == 0) {
-			xxchaEnabled = 1;
+		if (xxchaDisabled == 0) {
+			xxchaDisabled = 1;
 			raceBgPosition('#xxcha', 120);
 		} else {
-			xxchaEnabled = 0;
+			xxchaDisabled = 0;
 			raceBgPosition('#xxcha', 0);
 		}
 		//save to database code here ...
@@ -342,37 +354,178 @@ $(function() {
 	})
 
 	$('#yssaril').click(function() {
-		if (yssarilEnabled == 0) {
-			yssarilEnabled = 1;
+		if (yssarilDisabled == 0) {
+			yssarilDisabled = 1;
 			raceBgPosition('#yssaril', 120);
 		} else {
-			yssarilEnabled = 0;
+			yssarilDisabled = 0;
 			raceBgPosition('#yssaril', 0);
 		}
 		//save to database code here ...
 		disabledRaceAlert('yssaril');
 	})
 
+	$('#saar').click(function() {
+		if (saarDisabled == 0) {
+			saarDisabled = 1;
+			raceBgPosition('#saar', 120);
+		} else {
+			saarDisabled = 0;
+			raceBgPosition('#saar', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('saar');
+	})
+
+	$('#muaat').click(function() {
+		if (muaatDisabled == 0) {
+			muaatDisabled = 1;
+			raceBgPosition('#muaat', 120);
+		} else {
+			muaatDisabled = 0;
+			raceBgPosition('#muaat', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('muaat');
+	})
+
+	$('#winnu').click(function() {
+		if (winnuDisabled == 0) {
+			winnuDisabled = 1;
+			raceBgPosition('#winnu', 120);
+		} else {
+			winnuDisabled = 0;
+			raceBgPosition('#winnu', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('winnu');
+	})
+
+	$('#yin').click(function() {
+		if (yinDisabled == 0) {
+			yinDisabled = 1;
+			raceBgPosition('#yin', 120);
+		} else {
+			yinDisabled = 0;
+			raceBgPosition('#yin', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('yin');
+	})
+
+	$('#arborec').click(function() {
+		if (arborecDisabled == 0) {
+			arborecDisabled = 1;
+			raceBgPosition('#arborec', 143);
+		} else {
+			arborecDisabled = 0;
+			raceBgPosition('#arborec', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('arborec');
+	})
+
+	$('#creuss').click(function() {
+		if (creussDisabled == 0) {
+			creussDisabled = 1;
+			raceBgPosition('#creuss', 148);
+		} else {
+			creussDisabled = 0;
+			raceBgPosition('#creuss', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('creuss');
+	})
+
+	$('#nekro').click(function() {
+		if (nekroDisabled == 0) {
+			nekroDisabled = 1;
+			raceBgPosition('#nekro', 117);
+		} else {
+			nekroDisabled = 0;
+			raceBgPosition('#nekro', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('nekro');
+	})
+
+	$('#lazax').click(function() {
+		if (lazaxDisabled == 0) {
+			lazaxDisabled = 1;
+			raceBgPosition('#lazax', 123);
+		} else {
+			lazaxDisabled = 0;
+			raceBgPosition('#lazax', 0);
+		}
+		//save to database code here ...
+		disabledRaceAlert('lazax');
+	})
+//Start data check. Disable races where appropriate. Special needs for SotT races since their images are weird sizes.
+	for (var i = 0; i < raceArray.length; i++) {
+
+    	if (window[raceArray[i] + 'Disabled' ] == 1) {
+    		if (raceArray[i] == 'arborec') {
+    			raceBgPosition(String('#' + raceArray[i]), 143);
+    		} else if (raceArray[i] == 'creuss') {
+    			raceBgPosition(String('#' + raceArray[i]), 148);
+    		} else if (raceArray[i] == 'nekro') {
+    			raceBgPosition(String('#' + raceArray[i]), 117);
+    		} else if (raceArray[i] == 'lazax') {
+    			raceBgPosition(String('#' + raceArray[i]), 123);
+    		} else {
+    			raceBgPosition(String('#' + raceArray[i]), 120);
+    		}
+    		
+    	}
+	}
 
 });
 
-
+//Changes the Background Position so races look disabled/enabled. Sprite images.
 function raceBgPosition(id, yPos) {
-	$(''+ id +'').attr('style','background-position-y: '+ yPos +'px');
+	$(''+ id +'').attr('style','background-position-y: -'+ yPos +'px');
 }
 
 
-
+// Logic to control whether too many races have been disabled. You can't have fewer available races than players.
 function disabledRaceAlert(race) {
-	if ((letnevEnabled + hacanEnabled + solEnabled + l1z1xEnabled + mentakEnabled + naaluEnabled + sardakkEnabled + jol_narEnabled + xxchaEnabled + yssarilEnabled) > (10-counter) ) {
-		$('#base-game-races').before("<div id='too-many-disabled' class='alert alert-danger fade in'><button type='button' class='close' data-dismiss='alert'>×</button><i style='margin-right: 5px;' class='glyphicon glyphicon-ban-circle'></i><strong>Blocked. </strong>You'd have fewer races than players.</div>");
-		window[race + 'Enabled' ] = 0;
-		raceBgPosition('#'+ race +'', 0);
-
-
-	} else {
-		$('#too-many-disabled').remove();
+	if (seEnabled == 1 && sottEnabled == 1) {
+		if ((letnevDisabled + hacanDisabled + solDisabled + l1z1xDisabled + mentakDisabled + naaluDisabled + sardakkDisabled + jol_narDisabled + xxchaDisabled + yssarilDisabled + saarDisabled + muaatDisabled + winnuDisabled +yinDisabled + arborecDisabled + creussDisabled + nekroDisabled +lazaxDisabled) > (18-counter) ) {
+			$('#base-game-races').before("<div id='too-many-disabled' class='alert alert-danger fade in'><button type='button' class='close' data-dismiss='alert'>×</button><i style='margin-right: 5px;' class='glyphicon glyphicon-ban-circle'></i><b>Blocked. </b>You'd have fewer races than players.</div>");
+			window[race + 'Disabled' ] = 0;
+			raceBgPosition('#'+ race +'', 0);
+		} else {
+			$('#too-many-disabled').remove();
+		}
+	} else if (seEnabled == 1 && sottEnabled == 0) {
+		if ((letnevDisabled + hacanDisabled + solDisabled + l1z1xDisabled + mentakDisabled + naaluDisabled + sardakkDisabled + jol_narDisabled + xxchaDisabled + yssarilDisabled + saarDisabled + muaatDisabled + winnuDisabled + yinDisabled) > (14-counter) ) {
+			$('#base-game-races').before("<div id='too-many-disabled' class='alert alert-danger fade in'><button type='button' class='close' data-dismiss='alert'>×</button><i style='margin-right: 5px;' class='glyphicon glyphicon-ban-circle'></i><b>Blocked. </b>You'd have fewer races than players.</div>");
+			window[race + 'Disabled' ] = 0;
+			raceBgPosition('#'+ race +'', 0);
+		} else {
+			$('#too-many-disabled').remove();
+		}
+	} else if (seEnabled == 0 && sottEnabled == 1) {
+		if ((letnevDisabled + hacanDisabled + solDisabled + l1z1xDisabled + mentakDisabled + naaluDisabled + sardakkDisabled + jol_narDisabled + xxchaDisabled + yssarilDisabled + arborecDisabled + creussDisabled + nekroDisabled + lazaxDisabled) > (14-counter) ) {
+			$('#base-game-races').before("<div id='too-many-disabled' class='alert alert-danger fade in'><button type='button' class='close' data-dismiss='alert'>×</button><i style='margin-right: 5px;' class='glyphicon glyphicon-ban-circle'></i><b>Blocked. </b>You'd have fewer races than players.</div>");
+			window[race + 'Disabled' ] = 0;
+			raceBgPosition('#'+ race +'', 0);
+		} else {
+			$('#too-many-disabled').remove();
+		}
+	} else { // No expansions enabled
+		if ((letnevDisabled + hacanDisabled + solDisabled + l1z1xDisabled + mentakDisabled + naaluDisabled + sardakkDisabled + jol_narDisabled + xxchaDisabled + yssarilDisabled) > (10-counter) ) {
+			$('#base-game-races').before("<div id='too-many-disabled' class='alert alert-danger fade in'><button type='button' class='close' data-dismiss='alert'>×</button><i style='margin-right: 5px;' class='glyphicon glyphicon-ban-circle'></i><b>Blocked. </b>You'd have fewer races than players.</div>");
+			window[race + 'Disabled' ] = 0;
+			raceBgPosition('#'+ race +'', 0);
+		} else {
+			$('#too-many-disabled').remove();
+		}
 	}
+
+
+
+
 }
 
 
