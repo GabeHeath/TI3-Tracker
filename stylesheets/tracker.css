@@ -1,3 +1,30 @@
+.carousel-inner {
+     -webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+ */
+}
+
+.popover{
+    width:200px;
+    height:250px; 
+    max-width: 500px;   
+}
+
+
+.sc-caption-header {
+    font-size: 9px;
+}
+
+.sc-caption-list {
+    font-size: 10px;
+    margin-left: -25px;
+    text-align: left;
+}
+
+.read-more {
+    cursor: pointer;
+}
+
 #setting-expansions, #setting-strategy, #setting-race {
     width: 100%;
     text-align: left;
