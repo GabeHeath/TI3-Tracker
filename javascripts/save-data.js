@@ -84,15 +84,20 @@ $(document).ready(function() {
 				//Get a random number that falls within the length of randomArray
 				var rand = Math.floor(Math.random() * randomArray.length);
 
-				// Push to new race array the randomly selected race.
+				// Push to new race array the randomly selected race. WHich queues it to be saved below.
 				race.push(randomArray[rand]);
+
+				// Set the dropdown to the chosen random race, otherwise user will have to refresh page to see random.
+				$('#player_race_'+ (i+1) +'').val(randomArray[rand])
 
 				// Splice the array to delete the chosen race so it can't be chosen again.	
 				randomArray.splice(rand, 1);
 
+
 			} else {
 				race.push(removeRace[i]); // Else push the non random race name
 			}
+
 		}
 
 	    

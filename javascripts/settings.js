@@ -23,7 +23,7 @@ $(function() {
 // enables and disables expansions
 var seEnabled = 0;
 var sottEnabled = 0;
-var foteEnabled = 1; //Fall of the Empire (not an expansion - but kinda)
+var foteEnabled = 0; //Fall of the Empire (not an expansion - but kinda)
 
 function toggleExpansions(e){
 	if ($(this).attr('id') =='setting-se') {
