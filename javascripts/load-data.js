@@ -12,7 +12,7 @@ $(document).ready(function() {
         })
         .fail( function(xhr, textStatus, errorThrown) {
             //alert('Error: ' + xhr.responseText);
-            $('body').prepend('<div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert">×</button><strong>Error. </strong>Failed to load data.</div>');
+            $('body').prepend('<div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert">×</button><i style="margin-right: 5px;" class="glyphicon glyphicon-exclamation-sign"></i><strong>Error. </strong>Failed to load data.</div>');
             console.log('Error: ' + xhr.responseText);
         })
         .always(function() {
