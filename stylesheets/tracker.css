@@ -1,3 +1,7 @@
+.recommended-sott, .recommended-se. .recommended-none {
+    display: inline;
+}
+
 .carousel-inner {
      -webkit-user-select: none; /* Chrome/Safari */        
 -moz-user-select: none; /* Firefox */
@@ -25,14 +29,26 @@
     cursor: pointer;
 }
 
-#setting-expansions, #setting-strategy, #setting-race {
+.more-info {
+    cursor: pointer;
+    color: #fff;
+    padding: 6px;
+    border-radius: 12px;
+}
+
+.more-info:hover {
+       color: rgba(0, 0, 0, 0.53);
+       text-decoration: none; 
+}
+
+#setting-expansions, #setting-strategy, #setting-race, #setting-modules {
     width: 100%;
     text-align: left;
     background: none;
     border: none;
 }
 
-#setting-expansions:focus, #setting-strategy:focus, #setting-race:focus {
+#setting-expansions:focus, #setting-strategy:focus, #setting-race:focus, #setting-modules:focus {
     outline: 0;
 }
 
