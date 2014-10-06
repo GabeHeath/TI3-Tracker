@@ -39,7 +39,7 @@
             <li><a href="#messages" data-toggle="tab"><b>Technology</b></a>
 
             </li>
-            <li><a href="#video" data-toggle="tab"><b>Video Diaries</b></a>
+            <li><a href="#references" data-toggle="tab"><b>References</b></a>
 
             </li>
             <li><a href="#settings" data-toggle="tab"><b>Settings</b></a>
@@ -99,6 +99,7 @@
                 <input class="btn btn-primary" id="next-btn" onclick="nextStrategy()" type="button" value="Next">
             </div>
             <div class="tab-pane" id="messages">...</div>
+            <div class="tab-pane" id="references">references here</div>
             <!-- Begin Settings Tab -->
             <div class="tab-pane" id="settings">
                 <br>
@@ -1789,148 +1790,240 @@ After selecting this Strategy Card, claim the Speaker Token. During the Action P
                                           </ul>
                                         </div>
                                       </td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Age of Empire</b></td>
                                       <td><a id="setting-module-base-aoe" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><a class="module-help" data-toggle="modal" data-target="#myModal-aoe"><i class="right glyphicon glyphicon-question-sign"></i></a></td>
+
+
+
+ <!-- Modal -->
+                                                <div class="modal fade" id="myModal-aoe" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-aoe" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                                                </button>
+                                                                 <h4 class="modal-title" id="myModalLabel-aoe">Age of Empire</h4>
+
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>The victory point system of TI, as written, rewards players that seek a balance of planning and flexi-bility. Some players, however, may desire that the victory objectives of TI be more predictable (which was the case in the two previous editions of TI) so that they may form a more stable long term strate-gy. This is accomplished in the following way: After creating the Public Objective Deck as normal, start to draw its cards, starting from the top. After drawing a card, place it face up in the common play area, creating a straight line of cards starting to the left. After drawing and placing the “Game Over” card, if there are any additional cards remaining in the deck, place those cards back in the box (you will not need them). Now you should have a line of Public Objective Cards somewhere between 7 and 10 cards long with the “Game Over” card in the rightmost position. During the game, players may qualify for the victory points of <b>any</b> of the revealed Objective Cards from Turn one. No further Public Objective Cards will enter the game. In this way, players know exactly which objectives will give them victory points for the duration of the game. After the end of the Status Phase of the first game round, place a <b>Turn token</b> (a glass bead, a thimble, a quarter, etc.) on the <b>leftmost</b> card. After every Status Phase is finished, move the Turn token <b><i>one card to the right</i></b>. When the Turn token moves onto the Game Over card, the game ends immediately, and the player with the highest number of victory points is the winner (as described in the core rules). In this way, your row of Objective Cards also act as a Turn track.
+<hr>
+<b>From the Online-Errata:</b>
+When playing with the “Age of Empire” game option, players may not qualify for Stage II objectives during the first three rounds of play.</p>
+
+                                                          
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
                                     </tr>
                                     <tr>
                                       <td><b>Distant Suns</b></td>
                                       <td><a id="setting-module-base-ds" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><a class="module-help" data-toggle="modal" data-target="#myModal-ds"><i class="right glyphicon glyphicon-question-sign"></i></a></td>
                                     </tr>
+
+
+
+
+<div class="modal fade" id="myModal-ds" tabindex="-1" role="dialog" aria-labelledby="myModalLabel-ds" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                                                                </button>
+                                                                 <h4 class="modal-title" id="myModalLabel-ds">Age of Empire</h4>
+
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <p>Included in the game, you will find the octagon-shaped “Domain” counters that form the core of the “Distant Suns” game option. Using Domain Counters dramatically alters the strategy and flavour dur-ing the early turns of TI, as they simulate the dangers and rewards of space exploration and coloniza-tion. After the game board has been created, but before the game begins, randomize the Domain Coun-ters and place one Domain Counter <b>face down</b> on every neutral planet on the board (do not place Do-main Counters on any Home System planets or on Mecatol Rex). Place excess Domain Counters back in the box without looking at them.
+<br><br>
+<b>The Domain Counters</b>
+Domain Counters reflect the unknown aspects of deep-space exploration and colonization, functioning as follows:
+<ul>
+<li>A planet’s Domain Counter is revealed (and its effects resolved) immediately after a player has landed all his desired Ground Forces there during the “Planetary Landings” step of a Tac-tical Action. After a Domain Counter has been revealed, the active player may not land addi-tional Ground Force units on the planet during the same activation.</li>
+<li>When revealed, the symbol on the front of the Domain Counter represents the encounter/event of the planet. Immediately resolve the effects of that event. On the back of this rules booklet, you will find a detailed description of every Domain Counter effect.</li>
+<li>If a player comes to control a planet without actually landing forces there during a Tactical Action, the Domain Counter is ignored and placed back in the box with no effect.</li>
+<li>If, for any reason, a planet returns to neutrality after being occupied by a player, do <b>not</b> place a new Domain Counter on the planet.</li>
+</ul>
+<br>
+<b>Probing</b>
+Immediately after the movement step of a Tactical Action (not a Transfer Action) the active player may choose to <b>probe</b> Domain Counters in the activated system as long as he has <b>at least one Fighter unit in the system</b>. If probing, the player may secretly look at every face down Domain Counter in the system. After looking, he must return the Domain Counters face down to their respective planets. The player may not look at the counters again, unless he probes once more during a future activation, or lands Ground Forces on the planet. A player may not land Ground Forces on a planet during the same activation in which he probed the planet.
+<br><br>
+<b style="color:red">Special Rule:</b> If the Domain Counter “Lazax Survivors” is probed, remove the counter from the game. The probing player immediately receives one victory point and may immediately draw 3 action cards.
+<br><br>
+<b>Razing</b>
+During the Invasion Combat segment of a Tactical Action, a War Sun or Dreadnought in the same system as a Domain Counter may choose to <b><i>raze</i> a face down</b> Domain Counter. The active player simply announces that he is razing the planet, and then he removes the Domain Counter and returns it to the box without applying its effects. A War Sun or Dreadnought may not raze a Domain Counter that has already been revealed. Note that a single War Sun or Dreadnought may only raze one Domain Counter in its system. If a player wishes to raze two Domain Counters in the same system during the same activation, he must have at least two Dreadnoughts/ War Suns in the system. A War Sun or Dreadnought, that has been used (or will be used) for razing after the movement step may not be used for bombardment during the same activation. After razing a planet, a controversial act, the player may face adverse reactions from his own people and the Galactic Council. After razing a Domain Counter, the player should roll the dice and consult the table below.
+<br><br>
+<b>Result Effects</b><br>
+<b><i>1-7 No Effect</i></b><br>
+<b><i>8-9 Lose 3 random Action Cards</i></b><br>
+<b><i>0 Lose 3 random Action Cards and immediately exhaust all his ready planets.</i></b><br>
+<br>
+<b style="color: red">Special Rule:</b> If a player razes the “Lazax Survivors” Domain Counter, he must immediately discard all of his Action Cards, exhaust all of his planets, and lose all of his Trade Goods. In addition, that player may not vote on the next Political Agenda.
+</p>
+
+
+
+
+                                                          
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
+
+
                                     <tr>
                                       <td><b>Leaders</b></td>
                                       <td><a id="setting-module-base-leaders" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Sabatoge Runs</b></td>
                                       <td><a id="setting-module-base-sruns" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                   </tbody>                                                                
                               </table>
 
-                              <table id="se-module-table" class="table table-striped table-hover">
-
+                               <span id="se-modules">
                                 <h3> Shattered Empire Modules</h3>
+                              <table id="se-module-table se-modules" class="table table-striped table-hover">
                                   <tbody>
                                     <tr>
                                       <td style="width:73%;"><b>Variant Objectives</b></td>
                                       <td><a id="setting-module-se-vo" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Race Specific Technologies</b></td>
                                       <td><a id="setting-module-se-rst" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Artifacts</b></td>
                                       <td><a id="setting-module-se-artifacts" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Shock Troops</b></td>
                                       <td><a id="setting-module-se-stroops" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Space Mines</b></td>
                                       <td><a id="setting-module-se-smines" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Wormhole Nexus</b></td>
                                       <td><a id="setting-module-se-wnexus" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Facilities</b></td>
                                       <td><a id="setting-module-se-facilities" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Tactical Retreats</b></td>
                                       <td><a id="setting-module-se-tretreats" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>New Distant Suns Domain Counters</b></td>
                                       <td><a id="setting-module-se-newdsuns" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Territorial Distant Suns</b></td>
                                       <td><a id="setting-module-se-tdsuns" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Custodians of Mecatol Rex</b></td>
                                       <td><a id="setting-module-se-comrex" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Voice of the Council</b></td>
                                       <td><a id="setting-module-se-votc" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Simulated Early Turns</b></td>
                                       <td><a id="setting-module-se-seturns" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                   </tbody>      
                               </table>
+                            </span>
 
-                              <table id="sott-module-table" class="table table-striped table-hover">
-                                 <h3> Shards of the Throne Modules</h3>
+                              <span id="sott-modules">
+                              <h3> Shards of the Throne Modules</h3>
+                              <table id="sott-module-table sott-modules" class="table table-striped table-hover">
                                   <tbody>
                                     <tr>
                                       <td style="width:73%;"><b>Preliminary Objectives</b></td>
                                       <td><a id="setting-module-sott-pobj" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Race Specific Technologies</b></td>
                                       <td><a id="setting-module-sott-rst2" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Flagships</b></td>
                                       <td><a id="setting-module-sott-flagships" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>The Final Fronteir</b></td>
                                       <td><a id="setting-module-sott-ff" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Mechanized Units</b></td>
                                       <td><a id="setting-module-sott-munits" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Mercenaries</b></td>
                                       <td><a id="setting-module-sott-mercenaries" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Political Intrigue</b></td>
                                       <td><a id="setting-module-sott-pintrigue" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Fall of the Empire</b></td>
                                       <td><a id="setting-module-sott-fote" style="width: 33%;" class="btn btn-xs btn-danger">Disabled</a></td>
-                                      <td><i class="glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                   </tbody>                                                                
                               </table>
+                            </span>
                             </div>
                         </div>
                     </div>

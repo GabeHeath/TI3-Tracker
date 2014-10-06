@@ -117,7 +117,7 @@ $(function() {
 	$('#setting-module-se-stroops').click({id: "stroops"}, toggleModules);
 	$('#setting-module-se-smines').click({id: "smines"}, toggleModules);
 	$('#setting-module-se-wnexus').click({id: "wnexus"}, toggleModules);
-	$('#setting-module-se-facilities').click({id: "faciities"}, toggleModules);
+	$('#setting-module-se-facilities').click({id: "facilities"}, toggleModules);
 	$('#setting-module-se-tretreats').click({id: "tretreats"}, toggleModules);
 	$('#setting-module-se-newdsuns').click({id: "newdsuns"}, toggleModules);
 	$('#setting-module-se-tdsuns').click({id: "tdsuns"}, toggleModules);
@@ -160,6 +160,8 @@ function renderExpansionContent() {
 		$('.recommended-se').attr('style','display:inline'); // SC modal recommended cards
 		$('.recommended-sott').attr('style','display:inline');
 		$('.recommended-none').attr('style','display:inline'); // Enables recommendations
+		$('#se-modules').attr('style','display:block'); // Enables modules
+		$('#sott-modules').attr('style','display:block');
 
 
 	} else if ((seEnabled == 1) && (sottEnabled == 0)) {
@@ -179,6 +181,8 @@ function renderExpansionContent() {
 		$('.recommended-se').attr('style','display:inline'); // SC modal recommended cards
 		$('.recommended-sott').attr('style','display:none'); 
 		$('.recommended-none').attr('style','display:inline'); // Enables recommendations
+		$('#se-modules').attr('style','display:block'); // Enables modules
+		$('#sott-modules').attr('style','display:none');
 
 
 //Begin SE removal and SotT Reorganization
@@ -226,6 +230,8 @@ function renderExpansionContent() {
 		$('.recommended-se').attr('style','display:none'); // SC modal recommended cards
 		$('.recommended-sott').attr('style','display:inline'); 
 		$('.recommended-none').attr('style','display:inline'); // Enables recommendations
+		$('#se-modules').attr('style','display:none'); // Enables modules
+		$('#sott-modules').attr('style','display:block');
 
 
 //Begin SE removal and SotT Reorganization
@@ -277,6 +283,8 @@ function renderExpansionContent() {
 		$('.recommended-se').attr('style','display:none'); // SC modal recommended cards
 		$('.recommended-sott').attr('style','display:none');
 		$('.recommended-none').attr('style','display:none'); // Disables recommendations if only base game
+		$('#se-modules').attr('style','display:none'); // Disables modules
+		$('#sott-modules').attr('style','display:none');
 
 
 

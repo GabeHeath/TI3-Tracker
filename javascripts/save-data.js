@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 		// Choose which Random Array to use. This will be used if a player selects Random as a race type.
 	if (foteEnabled == 1) { // If Fall of te Empire enabled
-		console.log('counter:'+counter)
+	
 		if (counter == 4) {
 			var randomArray = ["The Barony of Letnev", "The Emirates of Hacan", "The Federation of Sol", "The Lazax"];
 		} else if (counter == 5) {
@@ -100,9 +100,16 @@ $(document).ready(function() {
 
 		}
 
-	    
+		// Store all setting values in this array
+		var setting = [seEnabled, sottEnabled, vpToWin, aoeEnabled, dsEnabled, leadersEnabled, srunsEnabled, voEnabled, rstEnabled,
+		artifactsEnabled, stroopsEnabled, sminesEnabled, wnexusEnabled, facilitiesEnabled, tretreatsEnabled, newdsunsEnabled,
+		tdsunsEnabled, comrexEnabled, votcEnabled, seturnsEnabled, pobjEnabled, rst2Enabled, flagshipsEnabled, ffEnabled,
+		munitsEnabled, mercenariesEnabled, pintrigueEnabled, foteEnabled,'none', //custom_house_rules
+		letnevDisabled, hacanDisabled, solDisabled,
+		l1z1xDisabled, mentakDisabled, naaluDisabled, sardakkDisabled, jol_narDisabled, xxchaDisabled, yssarilDisabled, saarDisabled,
+		muaatDisabled, winnuDisabled, yinDisabled, arborecDisabled, creussDisabled, nekroDisabled, lazaxDisabled];	    
 
-
+console.log(setting);
 		
 			// Returns successful data submission message when the entered information is stored in database.
 			$.post(
@@ -115,8 +122,18 @@ $(document).ready(function() {
 					c6: color[5], n6: name[5], r6: race[5],
 					c7: color[6], n7: name[6], r7: race[6],
 					c8: color[7], n8: name[7], r8: race[7],
+					s1: setting[0], s2: setting[1], s3: setting[2], s4: setting[3], s5: setting[4],
+					s6: setting[5], s7: setting[6], s8: setting[7], s9: setting[8], s10: setting[9],
+					s11: setting[10], s12: setting[11], s13: setting[12], s14: setting[13], s15: setting[14],
+					s16: setting[15], s17: setting[16], s18: setting[17], s19: setting[18], s20: setting[19],
+					s21: setting[20], s22: setting[21], s23: setting[22], s24: setting[23], s25: setting[24],
+					s26: setting[25], s27: setting[26], s28: setting[27], s29: setting[28], s30: setting[29],
+					s31: setting[30], s32: setting[31], s33: setting[32], s34: setting[33], s35: setting[34],
+					s36: setting[35], s37: setting[36], s38: setting[37], s39: setting[38], s40: setting[39],
+					s41: setting[40], s42: setting[41], s43: setting[42], s44: setting[43], s45: setting[44],
+					s46: setting[45], s47: setting[46],
 				}, function(data) {
-				
+				console.log(data);
 					if (data == "success") {
 						$('body').prepend('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">×</button><i style="margin-right: 10px;" class="glyphicon glyphicon-ok"></i><strong>Saved! </strong>Adding some more text here.</div>');
 					} else {

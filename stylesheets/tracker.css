@@ -1,3 +1,22 @@
+.module-help {
+    cursor: pointer;
+    color: black;
+}
+
+.module-help:hover {
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.27);
+}
+
+#se-modules, #sott-modules {
+    display:none;
+}
+
+
+.right {
+    float: right;
+}
+
 .recommended-sott, .recommended-se. .recommended-none {
     display: inline;
 }
