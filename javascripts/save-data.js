@@ -100,14 +100,15 @@ $(document).ready(function() {
 
 		}
 
+
 		// Store all setting values in this array
 		var setting = [seEnabled, sottEnabled, vpToWin, aoeEnabled, dsEnabled, leadersEnabled, srunsEnabled, voEnabled, rstEnabled,
 		artifactsEnabled, stroopsEnabled, sminesEnabled, wnexusEnabled, facilitiesEnabled, tretreatsEnabled, newdsunsEnabled,
 		tdsunsEnabled, comrexEnabled, votcEnabled, seturnsEnabled, pobjEnabled, rst2Enabled, flagshipsEnabled, ffEnabled,
-		munitsEnabled, mercenariesEnabled, pintrigueEnabled, foteEnabled,'none', //custom_house_rules
-		letnevDisabled, hacanDisabled, solDisabled,
-		l1z1xDisabled, mentakDisabled, naaluDisabled, sardakkDisabled, jol_narDisabled, xxchaDisabled, yssarilDisabled, saarDisabled,
-		muaatDisabled, winnuDisabled, yinDisabled, arborecDisabled, creussDisabled, nekroDisabled, lazaxDisabled];	    
+		munitsEnabled, mercenariesEnabled, pintrigueEnabled, foteEnabled, $('#custom_house_rules').val(), //House rule module
+		letnevDisabled, hacanDisabled, solDisabled, l1z1xDisabled, mentakDisabled, naaluDisabled, sardakkDisabled,
+		jol_narDisabled, xxchaDisabled, yssarilDisabled, saarDisabled, muaatDisabled, winnuDisabled, yinDisabled, arborecDisabled,
+		creussDisabled, nekroDisabled, lazaxDisabled];	    
 
 		// Store strategy card carousel index here
 		var scards = [sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8];

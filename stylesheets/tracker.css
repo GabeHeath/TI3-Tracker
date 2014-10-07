@@ -1,3 +1,7 @@
+#custom-input {
+    display:none;
+}
+
 .module-help {
     cursor: pointer;
     color: black;
@@ -13,9 +17,9 @@
 }
 
 
-/*.right {
+.right-table-help {
     float: right;
-}*/
+}
 
 .recommended-sott, .recommended-se. .recommended-none {
     display: inline;

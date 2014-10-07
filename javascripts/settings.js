@@ -57,6 +57,8 @@ var foteEnabled = 0;
 
 // Toggles Expansions on and off if they are clicked in the setting menu.
 function toggleExpansions(e){
+	clearStrategyCards();
+
 	if ($(this).attr('id') =='setting-se') {
 		if ($(this).text() == "Disabled") {
 			seEnabled = 1;
@@ -66,7 +68,6 @@ function toggleExpansions(e){
 			seEnabled = 0;
 			$(this).text('Disabled');
 			$(this).attr('class', 'btn btn-danger');
-
 		}
 	} else { // then it's SotT
 		if ($(this).text() == "Disabled") {
@@ -77,11 +78,39 @@ function toggleExpansions(e){
 			sottEnabled = 0;
 			$(this).text('Disabled');
 			$(this).attr('class', 'btn btn-danger');
-
 		}
 	}
 	
-	renderExpansionContent();
+	setTimeout(renderExpansionContent, 1000); // Have to time it out because if you don't the slide will get removed
+	// before the carousel gets reset to 0 which causes the slides to break if you go from both expanions enabled to 
+	// just SE enabled.
+
+}
+
+function clearStrategyCards() {
+
+	for (i=1; i<=8; i++){
+		console.log($('#myCarousel-'+ i).carousel(0));
+		window['sc' + i] = 0;
+	}
+	// sc1 = 0;
+	// sc2 = 0;
+	// sc3 = 0;
+	// sc4 = 0;
+	// sc5 = 0;
+	// sc6 = 0;
+	// sc7 = 0;
+	// sc8 = 0;
+
+	// $('#myCarousel-1').carousel(0);
+	// $('#myCarousel-2').carousel(0);
+	// $('#myCarousel-3').carousel(0);
+	// $('#myCarousel-4').carousel(0);
+	// $('#myCarousel-5').carousel(0);
+	// $('#myCarousel-6').carousel(0);
+	// $('#myCarousel-7').carousel(0);
+	// $('#myCarousel-8').carousel(0);
+
 
 }
 
@@ -152,6 +181,12 @@ $(function() {
 	$("#collapseTwo").on("click", "#sc7right", {sc: 7, arrow: 1}, setStrategyCards);
 	$("#collapseTwo").on("click", "#sc8left", {sc: 8, arrow: -1}, setStrategyCards);
 	$("#collapseTwo").on("click", "#sc8right", {sc: 8, arrow: 1}, setStrategyCards);
+
+	//Custom VP to Win buttons
+	$('#vp9').click({vp: 9}, setCustomVP);
+	$('#vp10').click({vp: 10}, setCustomVP);
+	$('#vp14').click({vp: 14}, setCustomVP);
+	$('#vpCustom').click({vp: "custom"}, setCustomVP);
 });
 
 var sc1 = 0;
@@ -161,29 +196,40 @@ var sc4 = 0;
 var sc5 = 0;
 var sc6 = 0;
 var sc7 = 0;
-var sc8 = 0;
+var sc8 = 0; 
+var isClicked = false; // Fast clicking the carousel offsetting the view from counter.
+// This delays the counter until the view catches up.
 
 function setStrategyCards(event) {
-	
-	if ((seEnabled == 1) && (sottEnabled == 1)) {
-		var scArray = [1,1,4,1,2,1,1,3]; //Array of total sc slides for each sc. Index 0 so slide - 1.
-	} else if ((seEnabled == 1) && (sottEnabled == 0)) {
-		var scArray = [1,1,1,1,1,1,1,2];
-	} else if ((seEnabled == 0) && (sottEnabled == 1)) {
-		var scArray = [0,0,3,0,1,0,0,1];
-	} else { // Base Game
-		var scArray = [0,0,0,0,0,0,0,0];
-	}
+	if (isClicked == false) { // If click not in progress run code
+		isClicked = true; //Set click to in progress
 
-	eval('sc' + event.data.sc + ' = (sc' + event.data.sc + ') + event.data.arrow'); //  +/- the arrow value to the global sc variable.
-	
-	if (eval('sc' + event.data.sc +  '> scArray[(event.data.sc) - 1]')) { // If the sc value is higher than the scArray value, set it to 0. Simulates carousel loop.
-		eval('sc' + event.data.sc + ' = 0');
-	} else if (eval('sc' + event.data.sc +  '< 0')) { // If it is below 0, set it to highest carousel value. Simulates loop.
-		eval('sc' + event.data.sc + ' = scArray[(event.data.sc) - 1]');
-	}
+		if ((seEnabled == 1) && (sottEnabled == 1)) {
+			var scArray = [1,1,4,1,2,1,1,3]; //Array of total sc slides for each sc. Index 0 so slide - 1.
+		} else if ((seEnabled == 1) && (sottEnabled == 0)) {
+			var scArray = [1,1,1,1,1,1,1,2];
+		} else if ((seEnabled == 0) && (sottEnabled == 1)) {
+			var scArray = [0,0,3,0,1,0,0,1];
+		} else { // Base Game
+			var scArray = [0,0,0,0,0,0,0,0];
+		}
 
-		//$('#myCarousel-8').carousel(0);
+		eval('sc' + event.data.sc + ' = (sc' + event.data.sc + ') + event.data.arrow'); //  +/- the arrow value to the global sc variable.
+		
+		if (eval('sc' + event.data.sc +  '> scArray[(event.data.sc) - 1]')) { // If the sc value is higher than the scArray value, set it to 0. Simulates carousel loop.
+			eval('sc' + event.data.sc + ' = 0');
+		} else if (eval('sc' + event.data.sc +  '< 0')) { // If it is below 0, set it to highest carousel value. Simulates loop.
+			eval('sc' + event.data.sc + ' = scArray[(event.data.sc) - 1]');
+		}
+
+		setTimeout(sleep, 600) //In .6 seconds set isClicked to false and allow new clicks.
+		}else {
+			return; //else exit loop because click currently in progress.
+	}
+}
+
+function sleep() {
+	isClicked = false;
 }
 
 
@@ -670,6 +716,248 @@ function disabledRaceAlert(race) {
 
 }
 
+function setCustomVP(event) {
+	if (event.data.vp == "custom") {
+		$('#custom-input').attr('style','display:block');
+		$('#customOK').click(function(){
+			vpToWin = $('#customVPvalue').val()
+
+			$('#set-vp').text(vpToWin + " VP's");
+			$('#custom-input').attr('style','display:none');
+
+		});
+	} else {
+		vpToWin = event.data.vp;
+		$('#set-vp').text(vpToWin + " VP's");
+	}
+}
+
+
+// On page load it takes all the data loaded from load-data.js and puts it into the site.
+function setSettings(data) {
+	// Set Expansion data
+//console.log(data);
+	if (data[2] == 1) { //SE
+		seEnabled = 1;
+		$('#setting-se').text('Enabled');
+		$('#setting-se').attr('class', 'btn btn-success');
+	}
+
+	if (data[3] == 1) { //SoTT
+		sottEnabled = 1;
+		$('#setting-sott').text('Enabled');
+		$('#setting-sott').attr('class', 'btn btn-success');	
+	}
+
+	renderExpansionContent();
+
+	//Special Case: Set Victory Points
+	$('#set-vp').text(data[4] + " VP's");
+
+	// Set Module data
+	// enables and disables Base Game modules
+	aoeEnabled = data[5];
+		loadModuleSettings("aoe","base");
+	dsEnabled = data[6];
+		loadModuleSettings("ds","base");
+	leadersEnabled = data[7];
+		loadModuleSettings("leaders","base");
+	srunsEnabled = data[8];
+		loadModuleSettings("sruns","base");
+	// enables and disables SE modules
+	voEnabled = data[9];
+		loadModuleSettings("vo","se");
+	rstEnabled = data[10];
+		loadModuleSettings("rst","se");
+	artifactsEnabled = data[11];
+		loadModuleSettings("artifacts","se");
+	stroopsEnabled = data[12];
+		loadModuleSettings("stroops","se");
+	sminesEnabled = data[13];
+		loadModuleSettings("smines","se");
+	wnexusEnabled = data[14];
+		loadModuleSettings("wnexus","se");
+	facilitiesEnabled = data[15];
+		loadModuleSettings("facilities","se");
+	tretreatsEnabled = data[16];
+		loadModuleSettings("tretreats","se");
+	newdsunsEnabled = data[17];
+		loadModuleSettings("newdsuns","se");
+	tdsunsEnabled = data[18];
+		loadModuleSettings("tdsuns","se");
+	comrexEnabled = data[19];
+		loadModuleSettings("comrex","se");
+	votcEnabled = data[20];
+		loadModuleSettings("votc","se");
+	seturnsEnabled = data[21];
+		loadModuleSettings("seturns","se");
+	// enables and disables SOTT modules
+	pobjEnabled = data[22];
+		loadModuleSettings("pobj","sott");
+	rst2Enabled = data[23];
+		loadModuleSettings("rst2","sott");
+	flagshipsEnabled = data[24];
+		loadModuleSettings("flagships","sott");
+	ffEnabled = data[25];
+		loadModuleSettings("ff","sott");
+	munitsEnabled = data[26];
+		loadModuleSettings("munits","sott");
+	mercenariesEnabled = data[27];
+		loadModuleSettings("mercenaries","sott");
+	pintrigueEnabled = data[28];
+		loadModuleSettings("pintrigue","sott");
+	foteEnabled = data[29];
+		loadModuleSettings("fote","sott");
+
+	// Set Custom house rules data
+	$('#custom_house_rules').val(data[30]);
+
+	//Set disabled races
+	if (parseInt(data[31]) == 1) {
+		letnevDisabled = parseInt(data[31]);
+		raceBgPosition('#letnev', 120);
+	}
+
+	if (parseInt(data[32]) == 1) {
+		hacanDisabled = parseInt(data[32]);
+		raceBgPosition('#hacan', 120);
+	}
+
+	if (parseInt(data[33]) == 1) {
+		solDisabled = parseInt(data[33]);
+		raceBgPosition('#sol', 120);
+	}
+
+	if (parseInt(data[34]) == 1) {
+		l1z1xDisabled = parseInt(data[34]);
+		raceBgPosition('#l1z1x', 120);
+	}
+
+	if (parseInt(data[35]) == 1) {
+		mentakDisabled = parseInt(data[35]);
+		raceBgPosition('#mentak', 120);
+	}
+
+	if (parseInt(data[36]) == 1) {
+		naaluDisabled = parseInt(data[36]);
+		raceBgPosition('#naalu', 120);
+	}
+
+	if (parseInt(data[37]) == 1) {
+		sardakkDisabled = parseInt(data[37]);
+		raceBgPosition('#sardakk', 120);
+	}
+
+	if (parseInt(data[38]) == 1) {
+		jol_narDisabled = parseInt(data[38]);
+		raceBgPosition('#jol_nar', 120);
+	}
+
+	if (parseInt(data[39]) == 1) {
+		xxchaDisabled = parseInt(data[39]);
+		raceBgPosition('#xxcha', 120);
+	}
+
+	if (parseInt(data[40]) == 1) {
+		yssarilDisabled = parseInt(data[40]);
+		raceBgPosition('#yssaril', 120);
+	}
+
+	if (parseInt(data[41]) == 1) {
+		saarDisabled = parseInt(data[41]);
+		raceBgPosition('#saar', 120);
+	}
+
+	if (parseInt(data[42]) == 1) {
+		muaatDisabled = parseInt(data[42]);
+		raceBgPosition('#muaat', 120);
+	}
+
+	if (parseInt(data[43]) == 1) {
+		winnuDisabled = parseInt(data[43]);
+		raceBgPosition('#winnu', 120);
+	}
+
+	if (parseInt(data[44]) == 1) {
+		yinDisabled = parseInt(data[44]);
+		raceBgPosition('#yin', 120);
+	}
+
+	if (parseInt(data[45]) == 1) {
+		arborecDisabled = parseInt(data[45]);
+		raceBgPosition('#arborec', 143);
+	}
+
+	if (parseInt(data[46]) == 1) {
+		creussDisabled = parseInt(data[46]);
+		raceBgPosition('#creuss', 148);
+	}
+
+	if (parseInt(data[47]) == 1) {
+		nekroDisabled = parseInt(data[47]);
+		raceBgPosition('#nekro', 117);
+	}
+
+	if (parseInt(data[48]) == 1) {
+		lazaxDisabled = parseInt(data[48]);
+		raceBgPosition('#lazax', 123);
+	}
+
+
+// Set Strategy Cards
+sc1 = parseInt(data[49]);
+	$('#myCarousel-1').carousel(parseInt(data[49]));
+sc2 = parseInt(data[50]);
+	$('#myCarousel-2').carousel(parseInt(data[50]));
+sc3 = parseInt(data[51]);
+	$('#myCarousel-3').carousel(parseInt(data[51]));
+sc4 = parseInt(data[52]);
+	$('#myCarousel-4').carousel(parseInt(data[52]));
+sc5 = parseInt(data[53]);
+	$('#myCarousel-5').carousel(parseInt(data[53]));
+sc6 = parseInt(data[54]);
+	$('#myCarousel-6').carousel(parseInt(data[54]));
+sc7 = parseInt(data[55]);
+	$('#myCarousel-7').carousel(parseInt(data[55]));
+sc8 = parseInt(data[56]);
+	$('#myCarousel-8').carousel(parseInt(data[56]));
+
+
+}
+
+// Toggles Modules on and off depending on loading value.
+function loadModuleSettings(arg, game){
+	if (game == "se"){
+
+		if (window[arg + 'Enabled'] == 1) {
+			$('#setting-module-se-' + arg).text('Enabled');
+			$('#setting-module-se-' + arg).attr('class', 'btn btn-xs btn-success');
+		}
+
+	} else if (game == "sott") {
+
+		if (window[arg + 'Enabled'] == 1) {
+			$('#setting-module-sott-' + arg).text('Enabled');
+			$('#setting-module-sott-' + arg).attr('class', 'btn btn-xs btn-success');
+		}// } else { // set to disabled
+		// 	$('#setting-module-sott-' + arg).text('Disabled');
+		// 	$('#setting-module-base-' + arg).attr('class', 'btn btn-xs btn-danger');
+		// }
+
+	} else {
+
+		if (window[arg + 'Enabled'] == 1) {
+			$('#setting-module-base-' + arg).text('Enabled');
+			$('#setting-module-base-' + arg).attr('class', 'btn btn-xs btn-success');
+		}// } else { // set to disabled
+		// 	$('#setting-module-base-' + arg).text('Disabled');
+		// 	$('#setting-module-base-' + arg).attr('class', 'btn btn-xs btn-danger');
+		// }
+
+	}
+
+	
+}
 
 
 

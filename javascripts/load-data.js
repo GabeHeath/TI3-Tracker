@@ -7,6 +7,7 @@ $(document).ready(function() {
         setPlayerData(data.player_data); // Populates the generated rows with player data
         renderExpansionContent() // Toggles items depending on expansions enabled. I had to put it here because it was trying to run
                                  // the javascript before this GET was done rendering the html.
+        setSettings(data.settings_data); //Grabs all settings from database and sets them. Modules, Strategy Cards, diabled races, and expanisions.
     }).done(function() {
             //alert( "second success" );
         })

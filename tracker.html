@@ -1779,18 +1779,21 @@ After selecting this Strategy Card, claim the Speaker Token. During the Action P
                                       <td style="width:73%;"><b>Victory Points to Win</b></td>                    
                                       <td>
                                         <div class="btn-group">
-                                          <a class="btn btn-xs btn-success"><i class="icon-user icon-white"></i> 10 VP's</a>
+                                          <a id="set-vp" class="btn btn-xs btn-success"><i class="icon-user icon-white"></i> 10 VP's</a>
                                           <a class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
                                           <ul class="dropdown-menu">
-                                            <li><a href="#"><i class="icon-pencil"></i>9</a></li>
-                                            <li><a href="#"><i class="icon-trash"></i>10</a></li>
-                                            <li><a href="#"><i class="icon-ban-circle"></i>14</a></li>
+                                            <li><a id="vp9" >9</a></li>
+                                            <li><a id="vp10" >10</a></li>
+                                            <li><a id="vp14" >14</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#"><i class="i"></i>Custom</a></li>
+                                            <li><a id="vpCustom">Custom</a></li>
                                           </ul>
                                         </div>
+                                        <span id="custom-input">
+                                        <input id="customVPvalue" maxlength="2" style="width: 30%;" type="number" min="1" max="99" class="input-small" placeholder="Custom"><a id="customOK" class="btn btn-xs btn-primary">OK</a>
+                                      </span>
                                       </td>
-                                      <td><i class="right glyphicon glyphicon-question-sign"></i></td>
+                                      <td><i class="right-table-help glyphicon glyphicon-question-sign"></i></td>
                                     </tr>
                                     <tr>
                                       <td><b>Age of Empire</b></td>
@@ -2024,6 +2027,24 @@ During the Invasion Combat segment of a Tactical Action, a War Sun or Dreadnough
                                   </tbody>                                                                
                               </table>
                             </span>
+
+
+
+
+                            
+                              <h3> Custom Modules</h3>
+                              <table class="table table-striped table-hover">
+                                  <tbody>
+                                    <tr>
+                                      <td style="width:29%;"><b>House Rules</b></td>
+                                      <td><textarea id="custom_house_rules" rows="5" cols="100"></textarea></td>
+                                      <td><i class="right-table-help glyphicon glyphicon-question-sign"></i></td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                             
+
+
                             </div>
                         </div>
                     </div>

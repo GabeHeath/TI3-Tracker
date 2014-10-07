@@ -1,10 +1,8 @@
 Eventually make real README
 
-Add custom house rules text box in modules
+Sanitize inputs better
 
-Save strategy card selection
-
-Change and save victory points to win
+Make notification that Strategy Cards are reset when new expanisons Enabled/Disabled.
 
 Add prev and next button to Strategy Card modals so you can skip between them
 
@@ -15,3 +13,5 @@ Add Domain counter pictures and desriptions becuase can't put table in modal app
 Login password homepage
 
 game overview page with old game summary and stats and ability to view new game.
+
+Copy game settings from one to the other.
