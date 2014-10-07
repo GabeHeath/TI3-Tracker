@@ -109,8 +109,9 @@ $(document).ready(function() {
 		l1z1xDisabled, mentakDisabled, naaluDisabled, sardakkDisabled, jol_narDisabled, xxchaDisabled, yssarilDisabled, saarDisabled,
 		muaatDisabled, winnuDisabled, yinDisabled, arborecDisabled, creussDisabled, nekroDisabled, lazaxDisabled];	    
 
-console.log(setting);
-		
+		// Store strategy card carousel index here
+		var scards = [sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8];
+
 			// Returns successful data submission message when the entered information is stored in database.
 			$.post(
 				"php/save-data.php", {
@@ -131,7 +132,8 @@ console.log(setting);
 					s31: setting[30], s32: setting[31], s33: setting[32], s34: setting[33], s35: setting[34],
 					s36: setting[35], s37: setting[36], s38: setting[37], s39: setting[38], s40: setting[39],
 					s41: setting[40], s42: setting[41], s43: setting[42], s44: setting[43], s45: setting[44],
-					s46: setting[45], s47: setting[46],
+					s46: setting[45], s47: setting[46], sc1: scards[0], sc2: scards[1], sc3: scards[2],
+					sc4: scards[3], sc5: scards[4], sc6: scards[5], sc7: scards[6], sc8: scards[7],
 				}, function(data) {
 				console.log(data);
 					if (data == "success") {
