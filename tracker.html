@@ -10,7 +10,8 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="application/javascript" src="http://jqueryrotate.googlecode.com/svn/trunk/jQueryRotate.js"></script>
         <link rel="stylesheet" href="stylesheets/tracker.css">
-        <script type="text/javascript" src="javascripts/tracker.js"></script>
+        <script type="text/javascript" src="javascripts/player.js"></script>
+        <script type="text/javascript" src="javascripts/turn-tracker.js"></script>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
         <!-- Optional theme -->
@@ -23,6 +24,8 @@
         <script src="javascripts/load-data.js"></script>
         <script src="javascripts/save-data.js"></script>
         <script src="javascripts/settings.js"></script>
+
+        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <!--[if lt IE 9]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -33,7 +36,7 @@
             <li class="active"><a href="#players-tab" data-toggle="tab"><b>Players</b></a>
 
             </li>
-            <li><a href="#turn-tracker" data-toggle="tab"><b>Turn Tracker</b></a>
+            <li><a id="tracker-tab" href="#turn-tracker" data-toggle="tab"><b>Turn Tracker</b></a>
 
             </li>
             <li><a href="#messages" data-toggle="tab"><b>Technology</b></a>
@@ -67,37 +70,159 @@
                 <input id="add-player" class="btn btn-primary" onclick="addPlayer()" type="button" value="Add Player">
             </div>
             <div class="tab-pane" id="turn-tracker">
-                <div class="pieContainer">
-                    <div class="pieBackground"></div>
-                    <div id="strategy-1" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <div id="strategy-2" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <div id="strategy-3" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <div id="strategy-4" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <div id="strategy-5" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <div id="strategy-6" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <div id="strategy-7" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <div id="strategy-8" class="hold">
-                        <div class="pie"></div>
-                    </div>
-                    <img id="needle" src="images/turn_tracker/turn_needle.png">
-                </div>
-                <input class="btn btn-primary" id="prev-btn" onclick="previousStrategy()" type="button" value="Previous">
-                <input class="btn btn-primary" id="next-btn" onclick="nextStrategy()" type="button" value="Next">
+                                   <div style="width: 75%; margin-left: 12.5%;" id="turnTracker" class="carousel slide" data-interval="0" data-ride="carousel">
+                                        <!-- Carousel indicators -->
+                                        <ol class="carousel-indicators">
+                                            <li data-target="#turnTracker" data-slide-to="0" class="active"></li>
+                                            <li data-target="#turnTracker" data-slide-to="1"></li>
+                                            <li data-target="#turnTracker" data-slide-to="2"></li>
+                                            <li data-target="#turnTracker" data-slide-to="3"></li>
+                                            <li data-target="#turnTracker" data-slide-to="4"></li>
+                                            <li data-target="#turnTracker" data-slide-to="5"></li>
+                                            <li data-target="#turnTracker" data-slide-to="6"></li>
+                                            <li data-target="#turnTracker" data-slide-to="7"></li>
+                                        </ol>
+                                        <!-- Carousel items -->
+                                        <div class="carousel-inner">
+                                            <div style="background: #AA4242;" class="active item">
+                                                 <h2 style="margin: 0; color: #943939; font-size: 270px;">1</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">one</h3>
+
+                                                    <br>
+
+                                                </div>
+                                            </div>
+                                            <div style="background: #E06E38;" class="item">
+                                                 <h2 style="margin: 0; color: #CC6433; font-size: 270px;">2</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">two</h3>
+
+                                                    <br> 
+
+                                                </div>
+                                            </div>
+
+                                            <div style="background: #DDD400;" class="item">
+                                                 <h2 style="margin: 0; color: #CEC500; font-size: 270px;">3</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">three</h3>
+
+                                                    <br> 
+
+                                                </div>
+                                            </div>
+
+                                            <div style="background: #214B23;" class="item">
+                                                 <h2 style="margin: 0; color: #1C3F1E; font-size: 270px;">4</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">four</h3>
+
+                                                    <br> 
+
+                                                </div>
+                                            </div>
+
+                                            <div style="background: #3D9748;" class="item">
+                                                 <h2 style="margin: 0; color: #378A41; font-size: 270px;">5</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">five</h3>
+
+                                                    <br> 
+
+                                                </div>
+                                            </div>
+
+                                            <div style="background: #32948C;" class="item">
+                                                 <h2 style="margin: 0; color: #2C8881; font-size: 270px;">6</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">six</h3>
+
+                                                    <br> 
+
+                                                </div>
+                                            </div>
+
+                                            <div style="background: #224983;" class="item">
+                                                 <h2 style="margin: 0; color: #1D3F72; font-size: 270px;">7</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">seven</h3>
+
+                                                    <br> 
+
+                                                </div>
+                                            </div>
+
+                                            <div style="background: #543969;" class="item">
+                                                 <h2 style="margin: 0; color: #4B335E; font-size: 270px;">8</h2>
+
+                                                <div class="carousel-caption">
+                                                     <h3 style="font-size: 19px;">eight</h3>
+
+                                                    <br> 
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Carousel nav --> <a class="carousel-control left" href="#turnTracker" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+ <a class="carousel-control right" href="#turnTracker" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+
+
+
+                                    </div>
+              
+
+
+
+
+<div id="sc-label-1" class="tracker-sc-label">SC1</div>
+<div id="sc-label-2" class="tracker-sc-label">SC2</div>
+<div id="sc-label-3" class="tracker-sc-label">SC3</div>
+<div id="sc-label-4" class="tracker-sc-label">SC4</div>
+<div id="sc-label-5" class="tracker-sc-label">SC5</div>
+<div id="sc-label-6" class="tracker-sc-label">SC6</div>
+<div id="sc-label-7" class="tracker-sc-label">SC7</div>
+<div id="sc-label-8" class="tracker-sc-label">SC8</div>
+
+   <div class="demo">
+    <div id="sortable" class="ui-state-default">
+        <div id = "draggable-player-1" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 1hhjjhhjkkhkhkhkkkhk</p></div>
+        <div id = "draggable-player-2" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 2</p></div>
+        <div id = "draggable-player-3" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 3</p></div>
+        <div id = "draggable-player-4" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 4</p></div>
+        <div id = "draggable-player-5" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 5</p></div>
+        <div id = "draggable-player-6" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 6</p></div>
+        <div id = "draggable-player-7" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 7</p></div>
+        <div id = "draggable-player-8" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 8hhjjhhjkkhkhkhkkkhk</p></div>
+    </div>
+</div>
+
+
+
+
+<h2 id="round-counter">Round: 1</h2>
+
+
+
             </div>
+
+
+
+
+
+
+
             <div class="tab-pane" id="messages">...</div>
             <div class="tab-pane" id="references">references here</div>
             <!-- Begin Settings Tab -->

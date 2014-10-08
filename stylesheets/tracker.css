@@ -1,3 +1,108 @@
+.move-icon {
+    float: right;
+    font-size: 17px;
+    padding: 3px;
+    color: rgba(196, 196, 196, 0.61);
+    position: relative;
+}
+
+#round-counter {
+    margin: 0;
+    padding-top: 90px;
+    color: #F1F1F1;
+    font-size: 150px;
+    text-align: center;
+     -webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+ */
+}
+
+#sc-label-1 {
+    background-color: #AA4242;
+}
+
+#sc-label-2 {
+    background-color: #E06E38;
+}
+
+#sc-label-3 {
+    background-color: #DDD400;
+}
+
+#sc-label-4 {
+    background-color: #214B23;
+}
+
+#sc-label-5 {
+    background-color: #3D9748;
+}
+
+#sc-label-6 {
+    background-color: #32948C;
+}
+
+#sc-label-7 {
+    background-color: #224983;
+}
+
+#sc-label-8 {
+    background-color: #543969;
+}
+
+
+.tracker-sc-label {
+    width:12.5%;
+    float:left;
+    text-align: center;
+    margin-top: 30px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    padding: 5px;
+    box-shadow: 10px 10px 5px #888888;
+     -webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+ */
+}
+
+
+#draggable-player-1, #draggable-player-2, #draggable-player-3, #draggable-player-4,
+#draggable-player-5, #draggable-player-6, #draggable-player-7, #draggable-player-8 {
+    width: 12.5%;
+    height: 100px;
+    text-align: center;
+    cursor: move;
+    font-size: 20px;
+
+    box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  background-image: -webkit-linear-gradient(top,#f5f5f5 0,#e8e8e8 100%);
+background-image: -o-linear-gradient(top,#f5f5f5 0,#e8e8e8 100%);
+background-image: -webkit-gradient(linear,left top,left bottom,from(#f5f5f5),to(#e8e8e8));
+background-image: linear-gradient(to bottom,#f5f5f5 0,#e8e8e8 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff5f5f5', endColorstr='#ffe8e8e8', GradientType=0);
+background-repeat: repeat-x;
+color: #333;
+background-color: #f5f5f5;
+border-top: 1px solid #ddd;
+border-right: 1px solid #ddd;
+border-bottom: 1px solid #ddd;
+border-left: 1px solid #f5f5f5;
+border-radius: 5px;
+box-shadow: 10px 10px 5px #888888;
+ -webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+ */
+}
+
+#sortable { width: 100%; height: 35px;  }
+
+#sortable > div { float: left; }
+p { padding: 0.5em; }
+
+
+
+
 #custom-input {
     display:none;
 }

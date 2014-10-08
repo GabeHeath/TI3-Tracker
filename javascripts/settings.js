@@ -93,24 +93,8 @@ function clearStrategyCards() {
 		console.log($('#myCarousel-'+ i).carousel(0));
 		window['sc' + i] = 0;
 	}
-	// sc1 = 0;
-	// sc2 = 0;
-	// sc3 = 0;
-	// sc4 = 0;
-	// sc5 = 0;
-	// sc6 = 0;
-	// sc7 = 0;
-	// sc8 = 0;
 
-	// $('#myCarousel-1').carousel(0);
-	// $('#myCarousel-2').carousel(0);
-	// $('#myCarousel-3').carousel(0);
-	// $('#myCarousel-4').carousel(0);
-	// $('#myCarousel-5').carousel(0);
-	// $('#myCarousel-6').carousel(0);
-	// $('#myCarousel-7').carousel(0);
-	// $('#myCarousel-8').carousel(0);
-
+	$('body').prepend('<div class="alert alert fade in"><button type="button" class="close" data-dismiss="alert">×</button><i style="margin-right: 10px;" class="glyphicon glyphicon-exclamation-sign"></i><strong>Notice: </strong>The Strategy Cards have been reset.</div>');
 
 }
 

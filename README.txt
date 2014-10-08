@@ -1,5 +1,7 @@
 Eventually make real README
 
+Finish modal helpers in Module settings
+
 Sanitize inputs better
 
 Make notification that Strategy Cards are reset when new expanisons Enabled/Disabled.
