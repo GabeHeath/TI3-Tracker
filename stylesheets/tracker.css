@@ -1,10 +1,89 @@
-.move-icon {
+.crop {
+    width: 200px;
+    height: 120px;
+    overflow: hidden;
+}
+
+.crop img {
+    width: 120px;
+    margin: 0px 0 0 17%;
+}
+
+
+.tracker-content-1 {
+    background-color: rgb(187, 87, 87);
+}
+
+.tracker-content-2 {
+    background-color: #E6894A;
+}
+
+.tracker-content-3 {
+    background-color: #E6E65D;
+}
+
+.tracker-content-4 {
+    background-color: #325E35;
+}
+
+.tracker-content-5 {
+    background-color: #61B465;
+}
+
+.tracker-content-6 {
+    background-color: rgba(218, 224, 233, 0.27);
+}
+
+.tracker-content-7 {
+    background-color: #446BA5;
+}
+
+.tracker-content-8 {
+    background-color: #764891;
+}
+
+.tracker-content-left {
+    position: absolute;
+    left: 12.5%;
+    top: 25%;
+    height: 60%;
+    width: 25%;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    font-size: 20px;
+}
+
+.tracker-content-right {
+    position: absolute;
+    right: 12.5%;
+    top: 25%;
+    height: 60%;
+    width: 25%;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,.6);
+    font-size: 20px;
+    z-index: 999;
+    padding: 0px 20px 0px 20px;
+}
+
+
+.tracker-card-name {
+    font-size: 40px !important;
+    margin-top: 4px;
+}
+
+.move-icon, .lock-icon {
     float: right;
     font-size: 17px;
     padding: 3px;
     color: rgba(196, 196, 196, 0.61);
     position: relative;
 }
+
 
 #round-counter {
     margin: 0;

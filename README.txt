@@ -1,10 +1,30 @@
+Turn tracker todo:
+
+When Pass button clicked confirmation appears. If yes, then go to next slide, remove, passed slide and set player draggable
+background to black.
+
+
+Take into acount # of players rules
+Take Naalu into account
+
+
+Keep position value saved so it can be resumed upon refresh.
+After all have passed end round and increment round counter.
+
+
+
+
+
+--------------------------------------
 Eventually make real README
+
+Stop Duplicate race selection
+
+Make Race images appear on Player tab once saved.
 
 Finish modal helpers in Module settings
 
 Sanitize inputs better
-
-Make notification that Strategy Cards are reset when new expanisons Enabled/Disabled.
 
 Add prev and next button to Strategy Card modals so you can skip between them
 

@@ -8,6 +8,7 @@
         <meta name="author" content="SitePoint">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <script type="application/javascript" src="http://jqueryrotate.googlecode.com/svn/trunk/jQueryRotate.js"></script>
         <link rel="stylesheet" href="stylesheets/tracker.css">
         <script type="text/javascript" src="javascripts/player.js"></script>
@@ -24,8 +25,6 @@
         <script src="javascripts/load-data.js"></script>
         <script src="javascripts/save-data.js"></script>
         <script src="javascripts/settings.js"></script>
-
-        <script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>
         <!--[if lt IE 9]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -84,87 +83,183 @@
                                         </ol>
                                         <!-- Carousel items -->
                                         <div class="carousel-inner">
-                                            <div style="background: #AA4242;" class="active item">
+                                            <div id="tracker-card-1" style="background: #AA4242;" class="active item">
+
+                                                <div id="tracker-slide-1-info" class="tracker-content-left tracker-content-1">
+                                                  <div id="tracker-slide-1-name"></div>
+                                                  <div id="tracker-slide-1-race"></div>                                   
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-1">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-1" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #943939; font-size: 270px;">1</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">one</h3>
+                                                     <h3 id="tracker-title-1" class="tracker-card-name" style="font-size: 19px;">One</h3>
 
                                                     <br>
 
                                                 </div>
                                             </div>
-                                            <div style="background: #E06E38;" class="item">
+                                            <div id="tracker-card-2" style="background: #E06E38;" class="item">
+
+                                                <div id="tracker-slide-2-info" class="tracker-content-left tracker-content-2">
+                                                  <div id="tracker-slide-2-name"></div>
+                                                  <div id="tracker-slide-2-race"></div>                                  
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-2">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-2" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #CC6433; font-size: 270px;">2</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">two</h3>
+                                                     <h3 id="tracker-title-2" class="tracker-card-name" style="font-size: 19px;">Two</h3>
 
                                                     <br> 
 
                                                 </div>
                                             </div>
 
-                                            <div style="background: #DDD400;" class="item">
+                                            <div id="tracker-card-3" style="background: #DDD400;" class="item">
+
+                                                <div id="tracker-slide-3-info" class="tracker-content-left tracker-content-3">
+                                                  <div id="tracker-slide-3-name"></div>
+                                                  <div id="tracker-slide-3-race"></div> 
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-3">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-3" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #CEC500; font-size: 270px;">3</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">three</h3>
+                                                     <h3 id="tracker-title-3" class="tracker-card-name" style="font-size: 19px;">Three</h3>
 
                                                     <br> 
 
                                                 </div>
                                             </div>
 
-                                            <div style="background: #214B23;" class="item">
+                                            <div id="tracker-card-4" style="background: #214B23;" class="item">
+
+                                                <div id="tracker-slide-4-info" class="tracker-content-left tracker-content-4">
+                                                  <div id="tracker-slide-4-name"></div>
+                                                  <div id="tracker-slide-4-race"></div> 
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-4">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-4" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #1C3F1E; font-size: 270px;">4</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">four</h3>
+                                                     <h3 id="tracker-title-4" class="tracker-card-name" style="font-size: 19px;">Four</h3>
 
                                                     <br> 
 
                                                 </div>
                                             </div>
 
-                                            <div style="background: #3D9748;" class="item">
+                                            <div id="tracker-card-5" style="background: #3D9748;" class="item">
+
+                                                <div id="tracker-slide-5-info" class="tracker-content-left tracker-content-5">
+                                                  <div id="tracker-slide-5-name"></div>
+                                                  <div id="tracker-slide-5-race"></div> 
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-5">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-5" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #378A41; font-size: 270px;">5</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">five</h3>
+                                                     <h3 id="tracker-title-5" class="tracker-card-name" style="font-size: 19px;">Five</h3>
 
                                                     <br> 
 
                                                 </div>
                                             </div>
 
-                                            <div style="background: #32948C;" class="item">
+                                            <div id="tracker-card-6" style="background: #32948C;" class="item">
+
+                                                <div id="tracker-slide-6-info" class="tracker-content-left tracker-content-6">
+                                                  <div id="tracker-slide-6-name"></div>
+                                                  <div id="tracker-slide-6-race"></div> 
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-6">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-6" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #2C8881; font-size: 270px;">6</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">six</h3>
+                                                     <h3 id="tracker-title-6" class="tracker-card-name" style="font-size: 19px;">Six</h3>
 
                                                     <br> 
 
                                                 </div>
                                             </div>
 
-                                            <div style="background: #224983;" class="item">
+                                            <div id="tracker-card-7" style="background: #224983;" class="item">
+
+                                                <div id="tracker-slide-7-info" class="tracker-content-left tracker-content-7">
+                                                  <div id="tracker-slide-7-name"></div>
+                                                  <div id="tracker-slide-7-race"></div> 
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-7">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-7" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #1D3F72; font-size: 270px;">7</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">seven</h3>
+                                                     <h3 id="tracker-title-7" class="tracker-card-name" style="font-size: 19px;">Seven</h3>
 
                                                     <br> 
 
                                                 </div>
                                             </div>
 
-                                            <div style="background: #543969;" class="item">
+                                            <div id="tracker-card-8" style="background: #543969;" class="item">
+
+                                                <div id="tracker-slide-8-info" class="tracker-content-left tracker-content-8">
+                                                  <div id="tracker-slide-8-name"></div>
+                                                  <div id="tracker-slide-8-race"></div> 
+                                                </div>
+                                                <div class="tracker-content-right tracker-content-8">
+                                                  <div>Actions</div>                                    
+                                                  <div><button id="tracker-activate-8" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
+                                                  <br>
+                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                </div>
+
                                                  <h2 style="margin: 0; color: #4B335E; font-size: 270px;">8</h2>
 
                                                 <div class="carousel-caption">
-                                                     <h3 style="font-size: 19px;">eight</h3>
+                                                     <h3 id="tracker-title-8" class="tracker-card-name" style="font-size: 19px;">Eight</h3>
 
                                                     <br> 
 
@@ -197,14 +292,14 @@
 
    <div class="demo">
     <div id="sortable" class="ui-state-default">
-        <div id = "draggable-player-1" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 1hhjjhhjkkhkhkhkkkhk</p></div>
-        <div id = "draggable-player-2" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 2</p></div>
-        <div id = "draggable-player-3" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 3</p></div>
-        <div id = "draggable-player-4" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 4</p></div>
-        <div id = "draggable-player-5" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 5</p></div>
-        <div id = "draggable-player-6" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 6</p></div>
-        <div id = "draggable-player-7" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 7</p></div>
-        <div id = "draggable-player-8" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><p style="margin-top: 25px;">Name 8hhjjhhjkkhkhkhkkkhk</p></div>
+        <div id = "draggable-player-1" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 1</p></div>
+        <div id = "draggable-player-2" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 2</p></div>
+        <div id = "draggable-player-3" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 3</p></div>
+        <div id = "draggable-player-4" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 4</p></div>
+        <div id = "draggable-player-5" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 5</p></div>
+        <div id = "draggable-player-6" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 6</p></div>
+        <div id = "draggable-player-7" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 7</p></div>
+        <div id = "draggable-player-8" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 8</p></div>
     </div>
 </div>
 
@@ -212,6 +307,24 @@
 
 
 <h2 id="round-counter">Round: 1</h2>
+
+<div style="height: 370px; top: 31px;" class="modal fade" id="startDialog" tabindex="-1" role="dialog" aria-labelledby="startDialogLabel" aria-hidden="false">
+  <div style="width: 1000px;" class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+           <h4 style="font-size: 50px; text-align: center;" class="modal-title" id="startDialogLabel">Turn Tracker</h4>
+      </div>
+      <div style="height: 140px; text-align: center;" class="modal-body">
+          <p>Drag the Player names below to the Strategy Card they have chosen.<br>Select <b>Start Round</b> once you are ready. This will lock in your selections.<br><br>If you need to move Players after starting the round, double click on the lock icon.<br>Movement will be enabled for 30 seconds.</p> 
+      </div>
+      <div class="modal-footer">
+          <button id="start-round-btn" type="button" class="btn btn-block btn-primary" data-dismiss="modal"><b>Start Round</b></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 
 
