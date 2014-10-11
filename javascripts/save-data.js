@@ -144,6 +144,7 @@ $(document).ready(function() {
 					}
 				})
 			  	.done(function() {
+			  		dragPosition();
 			    	//alert( "second success" );
 			  	})
 			  	.fail( function(xhr, textStatus, errorThrown) {

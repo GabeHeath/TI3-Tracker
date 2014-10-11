@@ -61,15 +61,21 @@ function addPlayer() {
 
 //Removes last row of the player table every time the close button is pressed. Then adds a close button to the new last row.
 function removeRow(row) {
-	counter -= 1;
 
-   if (counter <= 8) {
-		$('#add-player').removeClass('disabled');
+	if (roundStarted == 1) {
+		 $('body').prepend('<div class="alert alert-danger fade in"><button type="button" class="close" data-dismiss="alert">×</button><i style="margin-right: 5px;" class="glyphicon glyphicon-exclamation-sign"></i><strong>Blocked. </strong>It is not a good idea to remove Players once the Round has started.</div>');
+	} else {
+
+		counter -= 1;
+
+	   if (counter <= 8) {
+			$('#add-player').removeClass('disabled');
+		}
+
+	   $('#row' + row).remove();
+
+	   $('#remove_row_'+ (counter)).attr('style','display:block !important');
 	}
-
-   $('#row' + row).remove();
-
-   $('#remove_row_'+ (counter)).attr('style','display:block !important');
 
 }
 

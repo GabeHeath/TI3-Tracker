@@ -1,24 +1,73 @@
 // Activates the drag and drop of the turn tracker.
 jQuery(function($) {
       $("#sortable").sortable({
-        revert: true
+       // revert: true       // If you enable this make sure to change the setTimeout timer back to 2000 below in mouseup function
+        containment: 'parent'
     });
 });
 
 var roundStarted = 0;
 
-$(function() {
+var sc1Inactive = 0;
+var sc2Inactive = 0;
+var sc3Inactive = 0;
+var sc4Inactive = 0;
+var sc5Inactive = 0;
+var sc6Inactive = 0;
+var sc7Inactive = 0;
+var sc8Inactive = 0;
+
+$(function() { //onload look for clicks.
 
 	// Set the names on the draggable items to the names in the players tab.
 	$('#tracker-tab').click(function(){
-		for(i=1; i<=8; i++) {
-			var name = $('#player_name_'+i).val();
-			if (name) {
-				$('#draggable-player-'+i+' > p').text(name);
-			} else {
-				$('#draggable-player-'+i+' > p').text('Bonus');
+
+		if (counter < 3) {
+			$('#start-tracker-text').hide();
+			$('#start-round-btn').hide();
+			$('#not-enough-players').show();
+		} else if (counter >= 3 && counter <= 4) {
+
+			$('#start-tracker-text').show();
+			$('#start-round-btn').show();
+			$('#not-enough-players').hide();
+
+			for(i=1; i<=4; i++) {
+				var name = $('#player_name_'+i).val();
+				if (name) {
+					$('#draggable-player-'+i+' > p').text(name+': 1');
+				} else {
+					$('#draggable-player-'+i+' > p').text('Bonus');
+				}
+			}
+
+			for(i=1; i<=4; i++) {
+				var name = $('#player_name_'+i).val();
+				if (name) {
+					$('#draggable-player-'+(i+4)+' > p').text(name+': 2');
+				} else {
+					$('#draggable-player-'+(i+4)+' > p').text('Bonus');
+				}
+			}
+
+		} else {
+
+			$('#start-tracker-text').show();
+			$('#start-round-btn').show();
+			$('#not-enough-players').hide();
+
+			for(i=1; i<=8; i++) {
+				var name = $('#player_name_'+i).val();
+				if (name) {
+					$('#draggable-player-'+i+' > p').text(name);
+				} else {
+					$('#draggable-player-'+i+' > p').text('Bonus');
+				}
 			}
 		}
+
+
+
 
 		//Set the Strategy Card names on the turn tracker.
 		for(i=1; i<=8; i++) {
@@ -32,12 +81,39 @@ $(function() {
 			$('.modal-backdrop').removeClass("modal-backdrop"); // Removes the backdrop so players can control the draggables.
 		}
 
+
+
+
+		dragPosition(); // Update slides info immediately to prevent slice error if you pass with no assigned player.
+		if (roundStarted == 1) {
+			removeBonusSlides();
+		}
+
 	});
+
+
+
+
+
+
+
+
+
+	//Closes the modal opened above when in other tabs so you can scroll in other tabs
+	$('#settings-tab').click(function(){
+		$('.modal.in').modal('hide');
+	});
+	$('#players-tab-nav').click(function(){
+		$('.modal.in').modal('hide');
+	});
+	// Add other tabs here as needed.
+
 
 	//Controls what happens when the Start Round Button is clicked.
 	$('#start-round-btn').click(function(){
 		roundStarted = 1;
 		disableDrag();
+		removeBonusSlides();
 
 	});
 
@@ -53,18 +129,10 @@ $(function() {
 
 	for (i=1; i<=8; i++) {
 		$('#draggable-player-'+i).mouseup(function(){
-			setTimeout(dragPosition,2000);
+			setTimeout(dragPosition,100); //Originially 2000 if .sortable revert = true
 		});
 	}
 
-	var sc1Inactive = 0;
-	var sc2Inactive = 0;
-	var sc3Inactive = 0;
-	var sc4Inactive = 0;
-	var sc5Inactive = 0;
-	var sc6Inactive = 0;
-	var sc7Inactive = 0;
-	var sc8Inactive = 0;
 	// Changes stuff when Activate is clicked in the slides. For some reason could make these as for loops like the button above.
 	$('#tracker-activate-1').click(function() {
 		if (sc1Inactive == 0) {
@@ -196,6 +264,17 @@ $(function() {
 	});
 
 
+	
+	$('#pass-1').click({pass: 1}, passButtonClicked);
+	$('#pass-2').click({pass: 2}, passButtonClicked);
+	$('#pass-3').click({pass: 3}, passButtonClicked);
+	$('#pass-4').click({pass: 4}, passButtonClicked);
+	$('#pass-5').click({pass: 5}, passButtonClicked);
+	$('#pass-6').click({pass: 6}, passButtonClicked);
+	$('#pass-7').click({pass: 7}, passButtonClicked);
+	$('#pass-8').click({pass: 8}, passButtonClicked);
+
+
 });
 
 var draggablePlayerPosition = [];
@@ -213,29 +292,131 @@ function dragPosition(){
 			var name = "Bonus"; // Else store Bonus.
 		}
 
-		$('#tracker-slide-'+(i+1)+'-name').text(name); // Set the draggable element's content to name.
 
-		var raceImage = 'images/races/'+ showRaceImage($('#player_race_'+ player).val()) +'.png'; //Get the player's race value from the Player's Tab
-		// Put it in the showRaceImage function which returns the image file needed to load for that race.
 
-		if ($('#race-player-'+ player)) { // If an image is already in place, remove it so the new one doesn't keep pushing the divs down.
-			$('#race-player-'+ player).remove();
+		if (counter <= 4) { // If 3 or 4 players do this
+
+			if (i <= 3) { // If player name 1-4 (value is 3 to compensate for index 0 array)
+				$('#tracker-slide-'+(i+1)+'-name').text(name); // Set the draggable element's content to name of player. Nothing special. 
+
+
+				var raceImage = 'images/races/'+ showRaceImage($('#player_race_'+ player).val()) +'.png'; //Get the player's race value from the Player's Tab
+				// Put it in the showRaceImage function which returns the image file needed to load for that race.
+
+				if ($('#race-player-'+ player)) { // If an image is already in place, remove it so the new one doesn't keep pushing the divs down.
+					$('#race-player-'+ player).remove();
+				}
+
+				$('<div id="race-player-'+player+'" class="crop"><img id="race-player-'+player+'-image" src='+raceImage+'></div>').insertAfter('#tracker-slide-'+(i+1)+'-name'); // Put the new image right after the name.
+
+				//Special Conditions for stylings of SotT races
+				if (raceImage == 'images/races/the-arborec.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 101px;');
+				} else if (raceImage == 'images/races/the-ghosts-of-creuss.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 110px;');
+				} else if (raceImage == 'images/races/the-nekro-virus.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 133px;');
+				} else if (raceImage == 'images/races/lazax.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 142px;');
+				}
+
+
+				$('#tracker-slide-'+(i+1)+'-race').text($('#player_race_'+ player).val()); // Add the race's name right below the image.
+					if ( $('#player_race_'+ player).val() == "The Sardakk Norr") {
+						$('#tracker-slide-'+(i+1)+'-race').text("The Sardakk N'orr"); // Special case for the Sardakk because their apostraphe screws everything up.
+					}
+
+
+
+			} else { // If after player 4 we need to loop back to player 1 name since 3 and 4 player rules state that you get to pick 2 Strategy Cards.
+				$('#tracker-slide-'+(i+1)+'-name').text($('#tracker-slide-'+(i-3)+'-name').text()); // For setting this name subtract 4 (value 3 to compensate for index 0.)
+				// So technically it is (i+1)-4 but I just did i-3 to simplify. So basically set player 5 name to player 1, 6->2, 7->3, and 8->4.
+			
+
+
+
+
+
+
+
+
+
+
+
+		
+				var raceImage = 'images/races/'+ showRaceImage($('#player_race_'+ (parseInt(player)-4)).val()) +'.png'; //Get the player's race value from the Player's Tab
+				// Put it in the showRaceImage function which returns the image file needed to load for that race.
+
+				if ($('#race-player-'+ player)) { // If an image is already in place, remove it so the new one doesn't keep pushing the divs down.
+					$('#race-player-'+ player).remove();
+				}
+
+				$('<div id="race-player-'+player+'" class="crop"><img id="race-player-'+player+'-image" src='+raceImage+'></div>').insertAfter('#tracker-slide-'+(i+1)+'-name'); // Put the new image right after the name.
+
+				//Special Conditions for stylings of SotT races
+				if (raceImage == 'images/races/the-arborec.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 101px;');
+				} else if (raceImage == 'images/races/the-ghosts-of-creuss.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 110px;');
+				} else if (raceImage == 'images/races/the-nekro-virus.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 133px;');
+				} else if (raceImage == 'images/races/lazax.png') {
+					$('#race-player-'+player+'-image').attr('style','width: 142px;');
+				}
+
+
+				$('#tracker-slide-'+(i+1)+'-race').text($('#player_race_'+ (parseInt(player)-4)).val()); // Add the race's name right below the image.
+					if ( $('#player_race_'+ (parseInt(player)-4)).val() == "The Sardakk Norr") {
+						$('#tracker-slide-'+(i+1)+'-race').text("The Sardakk N'orr"); // Special case for the Sardakk because their apostraphe screws everything up.
+					}
+
+
+
+
+
+
+
+
+
+
+
+
+			}
+
+
+
+
+		} else { // if more than 4 players proceed as usual.
+
+			$('#tracker-slide-'+(i+1)+'-name').text(name); // Set the draggable element's content to name.
+
+			var raceImage = 'images/races/'+ showRaceImage($('#player_race_'+ player).val()) +'.png'; //Get the player's race value from the Player's Tab
+			// Put it in the showRaceImage function which returns the image file needed to load for that race.
+
+			if ($('#race-player-'+ player)) { // If an image is already in place, remove it so the new one doesn't keep pushing the divs down.
+				$('#race-player-'+ player).remove();
+			}
+
+			$('<div id="race-player-'+player+'" class="crop"><img id="race-player-'+player+'-image" src='+raceImage+'></div>').insertAfter('#tracker-slide-'+(i+1)+'-name'); // Put the new image right after the name.
+
+			//Special Conditions for stylings of SotT races
+			if (raceImage == 'images/races/the-arborec.png') {
+				$('#race-player-'+player+'-image').attr('style','width: 101px;');
+			} else if (raceImage == 'images/races/the-ghosts-of-creuss.png') {
+				$('#race-player-'+player+'-image').attr('style','width: 110px;');
+			} else if (raceImage == 'images/races/the-nekro-virus.png') {
+				$('#race-player-'+player+'-image').attr('style','width: 133px;');
+			} else if (raceImage == 'images/races/lazax.png') {
+				$('#race-player-'+player+'-image').attr('style','width: 142px;');
+			}
+
+
+			$('#tracker-slide-'+(i+1)+'-race').text($('#player_race_'+ player).val()); // Add the race's name right below the image.
+				if ( $('#player_race_'+ player).val() == "The Sardakk Norr") {
+					$('#tracker-slide-'+(i+1)+'-race').text("The Sardakk N'orr"); // Special case for the Sardakk because their apostraphe screws everything up.
+				}
+
 		}
-
-		$('<div id="race-player-'+player+'" class="crop"><img id="race-player-'+player+'-image" src='+raceImage+'></div>').insertAfter('#tracker-slide-'+(i+1)+'-name'); // Put the new image right after the name.
-
-		//Special Conditions for stylings of SotT races
-		if (raceImage == 'images/races/the-arborec.png') {
-			$('#race-player-'+player+'-image').attr('style','width: 101px;');
-		} else if (raceImage == 'images/races/the-ghosts-of-creuss.png') {
-			$('#race-player-'+player+'-image').attr('style','width: 110px;');
-		} else if (raceImage == 'images/races/the-nekro-virus.png') {
-			$('#race-player-'+player+'-image').attr('style','width: 133px;');
-		} else if (raceImage == 'images/races/lazax.png') {
-			$('#race-player-'+player+'-image').attr('style','width: 142px;');
-		}
-
-		$('#tracker-slide-'+(i+1)+'-race').text($('#player_race_'+ player).val()); // Add the race's name right below the image.
 	}
 }
 
@@ -277,6 +458,10 @@ function showRaceImage(race) {
     	return ('the_yin_brotherhood');
     case "The Yssaril Tribes":
     	return ('the_yssaril_tribes');
+    case "Random":
+    	return ('random');
+    case "undefined": // Happens when No race chosen
+    	return ('undefined');
 	}
 }
 
@@ -305,6 +490,79 @@ function disableDrag() {
 	$('.lock-icon').show();
 
 	$("#sortable").sortable({ disabled: true }); // Disables dragging
+}
+
+
+function passButtonClicked(event) {
+	if (eval('(sc'+event.data.pass+'Inactive) == 0')) {
+		$('#sc-not-played').show();
+		$('#pass-close').show();
+		$('#pass-confirm-message').hide();
+		$('#pass-cancel').hide();
+		$('#pass-activate').hide();
+		$('#passConfirmLabel').text("Alert");
+	} else {
+		$('#sc-not-played').hide();
+		$('#pass-close').hide();
+		$('#pass-confirm-message').show();
+		$('#pass-cancel').show();
+		$('#pass-activate').show();	
+		$('#passConfirmLabel').text("Confirm");
+	}
+
+	$('#passConfirm').modal({show:true});
+
+	$('#pass-activate').click({passed: event.data.pass}, passConfirmed);
+}
+
+// When pass confirmed in pass dialog modal
+function passConfirmed(event) {
+	$('#pass-indicator-'+event.data.passed).remove()
+	$('#turnTracker').carousel('next');
+	// This is a doozy. Ok - So it takes the draggable-player-x id. Those id's are assigned to each of the draggable
+	// player items in order of how players are organized in the Player tab. This function removes slides and changes these
+	// draggable items to black. Since players move around you have to find which player is assigned to the Strategy Card slide.
+	// To do that you look in the draggablePlayerPosition array and find event.data.passed which is the Player number who clicked
+	// the pass button on the slide (passed comes from the pass param which comes from the onclick parmeter). Then, you have to
+	// subtract 1 because the array is 0 indexed but the player numbers aren't. Then you slice (get) the last character in the
+	// draggablePlayerPosition array. Values in this array look like draggable-player-1, draggable-player-2, etc. So essentially,
+	// you are getting the number of the player assigned to the card. Next we add the class passed-player, which turns the draggable
+	// item black.
+	$('#draggable-player-'+ ((draggablePlayerPosition[(event.data.passed)-1]).slice(-1))).addClass('passed-player');
+	setTimeout(function() {
+		removeSlide(event.data.passed);
+	}, 1500);
+
+}
+
+function removeSlide(slide) {
+	$('#tracker-card-'+slide).remove()
+
+	// Get how many slides remain
+	var totalItems = $('#turnTracker .item').length;
+	if (totalItems <= 1) {
+		$('#tracker-left-nav').hide();
+		$('#tracker-right-nav').hide();
+	}
+
+	if (totalItems == 0) {
+		$('#new-game-round').show();
+	}
+
+}
+
+
+function removeBonusSlides() {
+	for (i=1; i<=8; i++) {
+		if($('#draggable-player-'+i+ ' p').text() == "Bonus") { // Find which draggables say Bonus
+			var slide = (jQuery.inArray('draggable-player-'+i, draggablePlayerPosition))+1; // Find where that draggable falls in draggablePlayer array (slide order)
+			$('#tracker-card-'+slide).remove(); //Remove that carousel slide
+			$('#pass-indicator-'+slide).remove(); //Remove that carousel indicator
+			$('#sc-label-'+slide).css({"color":"gray", "background-color":"#333"}); //Change the slide label to passed css
+			$('#draggable-player-'+i).addClass('passed-player'); //Change the draggable css to passed style
+		}
+	}
+
 }
 
 

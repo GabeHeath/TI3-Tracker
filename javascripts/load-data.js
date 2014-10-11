@@ -10,6 +10,9 @@ $(document).ready(function() {
         setSettings(data.settings_data); //Grabs all settings from database and sets them. Modules, Strategy Cards, diabled races, and expanisions.
     }).done(function() {
             //alert( "second success" );
+            if (counter >= 8) {
+                $('#add-player').addClass('disabled');
+            }
         })
         .fail( function(xhr, textStatus, errorThrown) {
             //alert('Error: ' + xhr.responseText);

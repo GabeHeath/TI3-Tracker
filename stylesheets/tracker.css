@@ -1,3 +1,28 @@
+#new-game-round {
+    display:none;
+    background-color: #333;
+    margin-left: 31.5%;
+    margin-top: 50px;
+    color: #fff;
+    width: 37.5%;
+    height: 150px;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    padding: 15px;
+}
+
+.passed-player {
+    color: gray !important;
+    background-image: none !important;
+    background-color: #333 !important;
+    border-top: 1px solid #464646 !important;
+    border-left: 1px solid #333 !important;
+    border-radius: 0px !important;
+    border-right: 1px solid #333 !important;
+    border-bottom: 1px solid #333 !important;
+}
+
 .crop {
     width: 200px;
     height: 120px;
@@ -86,7 +111,7 @@
 
 
 #round-counter {
-    margin: 0;
+    margin-top: -25px;
     padding-top: 90px;
     color: #F1F1F1;
     font-size: 150px;
@@ -174,7 +199,7 @@ box-shadow: 10px 10px 5px #888888;
 -ms-user-select: none; /* IE10+ */
 }
 
-#sortable { width: 100%; height: 35px;  }
+#sortable { width: 100%; height: 35px; display: inline-block;  }
 
 #sortable > div { float: left; }
 p { padding: 0.5em; }

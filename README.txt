@@ -1,18 +1,17 @@
 Turn tracker todo:
 
-When Pass button clicked confirmation appears. If yes, then go to next slide, remove, passed slide and set player draggable
-background to black.
+create restore slides function for new round.
+
+fix bugs for when people move stuff around in tracker after the round has started.
+	new bonus not black
+	slides mixed up
+	titles not black
 
 
-Take into acount # of players rules
 Take Naalu into account
-
 
 Keep position value saved so it can be resumed upon refresh.
 After all have passed end round and increment round counter.
-
-
-
 
 
 --------------------------------------

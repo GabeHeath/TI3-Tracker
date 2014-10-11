@@ -32,7 +32,7 @@
     
     <body>
         <ul class="nav nav-tabs" id="myTab">
-            <li class="active"><a href="#players-tab" data-toggle="tab"><b>Players</b></a>
+            <li id="players-tab-nav" class="active"><a href="#players-tab" data-toggle="tab"><b>Players</b></a>
 
             </li>
             <li><a id="tracker-tab" href="#turn-tracker" data-toggle="tab"><b>Turn Tracker</b></a>
@@ -44,7 +44,7 @@
             <li><a href="#references" data-toggle="tab"><b>References</b></a>
 
             </li>
-            <li><a href="#settings" data-toggle="tab"><b>Settings</b></a>
+            <li><a id="settings-tab" href="#settings" data-toggle="tab"><b>Settings</b></a>
 
             </li>
             <button class="btn btn-primary" id="save-btn" type="submit" data-loading-text="Saving...">Save</button>
@@ -72,14 +72,14 @@
                                    <div style="width: 75%; margin-left: 12.5%;" id="turnTracker" class="carousel slide" data-interval="0" data-ride="carousel">
                                         <!-- Carousel indicators -->
                                         <ol class="carousel-indicators">
-                                            <li data-target="#turnTracker" data-slide-to="0" class="active"></li>
-                                            <li data-target="#turnTracker" data-slide-to="1"></li>
-                                            <li data-target="#turnTracker" data-slide-to="2"></li>
-                                            <li data-target="#turnTracker" data-slide-to="3"></li>
-                                            <li data-target="#turnTracker" data-slide-to="4"></li>
-                                            <li data-target="#turnTracker" data-slide-to="5"></li>
-                                            <li data-target="#turnTracker" data-slide-to="6"></li>
-                                            <li data-target="#turnTracker" data-slide-to="7"></li>
+                                            <li id="pass-indicator-1" data-target="#turnTracker" data-slide-to="0" class="active"></li>
+                                            <li id="pass-indicator-2" data-target="#turnTracker" data-slide-to="1"></li>
+                                            <li id="pass-indicator-3" data-target="#turnTracker" data-slide-to="2"></li>
+                                            <li id="pass-indicator-4" data-target="#turnTracker" data-slide-to="3"></li>
+                                            <li id="pass-indicator-5" data-target="#turnTracker" data-slide-to="4"></li>
+                                            <li id="pass-indicator-6" data-target="#turnTracker" data-slide-to="5"></li>
+                                            <li id="pass-indicator-7" data-target="#turnTracker" data-slide-to="6"></li>
+                                            <li id="pass-indicator-8" data-target="#turnTracker" data-slide-to="7"></li>
                                         </ol>
                                         <!-- Carousel items -->
                                         <div class="carousel-inner">
@@ -93,7 +93,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-1" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-1" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #943939; font-size: 270px;">1</h2>
@@ -115,7 +115,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-2" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-2" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #CC6433; font-size: 270px;">2</h2>
@@ -138,7 +138,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-3" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-3" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #CEC500; font-size: 270px;">3</h2>
@@ -161,7 +161,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-4" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-4" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #1C3F1E; font-size: 270px;">4</h2>
@@ -184,7 +184,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-5" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-5" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #378A41; font-size: 270px;">5</h2>
@@ -207,7 +207,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-6" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-6" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #2C8881; font-size: 270px;">6</h2>
@@ -230,7 +230,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-7" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-7" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #1D3F72; font-size: 270px;">7</h2>
@@ -253,7 +253,7 @@
                                                   <div>Actions</div>                                    
                                                   <div><button id="tracker-activate-8" style="margin-top: 20px;" class="btn btn-large btn-block btn-default" type="button">Status: Activate</button></div>
                                                   <br>
-                                                  <div><button class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
+                                                  <div><button id="pass-8" class="btn btn-large btn-block btn-default" type="button">Pass</button></div>
                                                 </div>
 
                                                  <h2 style="margin: 0; color: #4B335E; font-size: 270px;">8</h2>
@@ -266,10 +266,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- Carousel nav --> <a class="carousel-control left" href="#turnTracker" data-slide="prev">
+                                        <!-- Carousel nav --> <a id="tracker-left-nav" class="carousel-control left" href="#turnTracker" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left"></span>
         </a>
- <a class="carousel-control right" href="#turnTracker" data-slide="next">
+ <a id="tracker-right-nav" class="carousel-control right" href="#turnTracker" data-slide="next">
             <span class="glyphicon glyphicon-chevron-right"></span>
         </a>
 
@@ -290,7 +290,7 @@
 <div id="sc-label-7" class="tracker-sc-label">SC7</div>
 <div id="sc-label-8" class="tracker-sc-label">SC8</div>
 
-   <div class="demo">
+
     <div id="sortable" class="ui-state-default">
         <div id = "draggable-player-1" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 1</p></div>
         <div id = "draggable-player-2" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 2</p></div>
@@ -301,7 +301,6 @@
         <div id = "draggable-player-7" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 7</p></div>
         <div id = "draggable-player-8" class="ui-state-default"><i class="move-icon glyphicon glyphicon-move"></i><i style="display:none;" class="lock-icon glyphicon glyphicon-lock"></i><p style="margin-top: 25px;">Name 8</p></div>
     </div>
-</div>
 
 
 
@@ -314,9 +313,15 @@
       <div class="modal-header">
            <h4 style="font-size: 50px; text-align: center;" class="modal-title" id="startDialogLabel">Turn Tracker</h4>
       </div>
-      <div style="height: 140px; text-align: center;" class="modal-body">
+      <div id="start-tracker-text" style="height: 140px; text-align: center;" class="modal-body">
           <p>Drag the Player names below to the Strategy Card they have chosen.<br>Select <b>Start Round</b> once you are ready. This will lock in your selections.<br><br>If you need to move Players after starting the round, double click on the lock icon.<br>Movement will be enabled for 30 seconds.</p> 
       </div>
+
+      <div id="not-enough-players" style="font-size: 34px;
+text-align: center; display:none;" class="modal-body">
+          <p>You need at least 3 players to begin. Add more players in the Players tab.</p> 
+      </div>
+
       <div class="modal-footer">
           <button id="start-round-btn" type="button" class="btn btn-block btn-primary" data-dismiss="modal"><b>Start Round</b></button>
       </div>
@@ -325,6 +330,35 @@
 </div>
 
 
+
+
+<div class="modal fade" id="passConfirm" tabindex="-1" role="dialog" aria-labelledby="pasConfirmLabel" aria-hidden="false">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></span></button>
+           <h4 style="font-size: 25px; text-align: center;" class="modal-title" id="passConfirmLabel">Confirm</h4>
+      </div>
+      <div class="modal-body">
+          <p id="sc-not-played">You cannot pass until you have played your Strategy Card.</p> 
+          <p id="pass-confirm-message">Are you sure you want to <b>Pass</b>? This cannot be undone.
+      </div>
+      <div class="modal-footer">
+        <button id="pass-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="pass-cancel" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button id="pass-activate" type="button" class="btn btn-primary" data-dismiss="modal"><b>Pass</b></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div id="new-game-round">
+  Start New Round?
+  <button style="margin-top: 30px;
+font-size: 20px;" id="start-new-round" class="btn btn-block btn-primary">Start</button>
+</div>
 
 
 
