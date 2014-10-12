@@ -8,6 +8,7 @@ jQuery(function($) {
 
 var roundStarted = 0;
 
+var sc0Inactive = 0; //naalu
 var sc1Inactive = 0;
 var sc2Inactive = 0;
 var sc3Inactive = 0;
@@ -17,7 +18,11 @@ var sc6Inactive = 0;
 var sc7Inactive = 0;
 var sc8Inactive = 0;
 
+var zeroSlide = 0; //For naalu slide. Tells which SC player picked.
+var naaluPlayer = {player: 0, active: 0};
+
 $(function() { //onload look for clicks.
+
 
 	// Set the names on the draggable items to the names in the players tab.
 	$('#tracker-tab').click(function(){
@@ -89,6 +94,7 @@ $(function() { //onload look for clicks.
 			removeBonusSlides();
 		}
 
+
 	});
 
 
@@ -114,6 +120,27 @@ $(function() { //onload look for clicks.
 		roundStarted = 1;
 		disableDrag();
 		removeBonusSlides();
+
+		//See if there is a Naalu Player. They always go first in turn order.
+		for (i=1; i<=8; i++) {
+		  if ($('#player_race_'+i).val() == "The Naalu Collective") {
+		    naaluPlayer = {player: i, active: 1};
+		  }
+		}
+
+		if (naaluPlayer.active == 1) {
+			//Activate slide 0
+			$('#tracker-inner').prepend("<div id='tracker-card-0' style='background: #827210;' class='active item'> <div id='tracker-slide-0-info' class='tracker-content-left tracker-content-0'> <div id='tracker-slide-0-name'></div><div id='race-player-0' class='crop'><img id='race-player-0-image' src='images/races/the_naalu_collective.png'></div><div id='tracker-slide-0-race'>The Naalu Collective</div> </div> <div class='tracker-content-right tracker-content-0'> <div>Actions</div> <div><button id='tracker-activate-0' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button></div> <br> <div><button id='pass-0' class='btn btn-large btn-block btn-default' type='button'>Pass</button></div> </div> <h2 style='margin: 0; color: #72640D; font-size: 270px;'>0</h2> <div class='carousel-caption'> <h3 id='tracker-title-0' class='tracker-card-name' style='font-size: 19px;'>Zero</h3> <br> </div> </div>");
+			$('#tracker-card-1').removeClass('active');
+			// Add the Naalu player's name to slide
+			$('#tracker-slide-0-name').text($('#player_name_'+naaluPlayer.player).val());
+			// Add the chosen SC name to slide.
+			zeroSlide = (jQuery.inArray('draggable-player-'+naaluPlayer.player, draggablePlayerPosition))+1; // Find where that draggable falls in draggablePlayer array (slide order)
+			$('#tracker-title-0').text($('#sc-label-'+zeroSlide).text());
+			//Reomove chosen SC slide since it's replaced by the Naalu slide
+			$('#tracker-card-'+zeroSlide).remove();
+		}
+
 
 	});
 
@@ -263,8 +290,10 @@ $(function() { //onload look for clicks.
 		}
 	});
 
+	$("#tracker-inner").on("click", "#tracker-activate-0", statusOfSlide0);
 
-	
+
+	$("#tracker-inner").on("click", "#pass-0", passButtonZeroClicked);
 	$('#pass-1').click({pass: 1}, passButtonClicked);
 	$('#pass-2').click({pass: 2}, passButtonClicked);
 	$('#pass-3').click({pass: 3}, passButtonClicked);
@@ -563,6 +592,57 @@ function removeBonusSlides() {
 		}
 	}
 
+}
+
+
+function statusOfSlide0() {
+	cssArray = ['#AA4242','#E06E38','#DDD400','#214B23','#3D9748','#32948C','#224983','#543969']; //hex values of all SC labels so naalu can restore if unactivated.
+
+	if (sc0Inactive == 0) {
+		sc0Inactive = 1;
+		$('#tracker-card-0').attr('style','background-color: #333');
+		$('#sc-label-'+zeroSlide).css({"color":"gray", "background-color":"#333"});
+		$('.tracker-content-0').attr('style','background-color: #606264');
+		$('#tracker-activate-0').text('Status: Inactive');
+	} else {
+		sc0Inactive = 0;
+		$('#tracker-card-0').attr('style','background-color: #827210');
+		$('#sc-label-'+zeroSlide).css({"color":"#fff", "background-color": (cssArray[(zeroSlide-1)])});
+		$('.tracker-content-0').attr('style','background-color: #A09131');
+		$('#tracker-activate-0').text('Status: Active');
+	}
+}
+
+function passButtonZeroClicked() {
+
+	if (sc0Inactive == 0) {
+		$('#sc-not-played').show();
+		$('#pass-close').show();
+		$('#pass-confirm-message').hide();
+		$('#pass-cancel').hide();
+		$('#pass-activate').hide();
+		$('#passConfirmLabel').text("Alert");
+	} else {
+		$('#sc-not-played').hide();
+		$('#pass-close').hide();
+		$('#pass-confirm-message').show();
+		$('#pass-cancel').show();
+		$('#pass-activate').show();	
+		$('#passConfirmLabel').text("Confirm");
+	}
+
+	$('#passConfirm').modal({show:true});
+
+	$('#pass-activate').click(slideZeroPassConfirmed);
+}
+
+function slideZeroPassConfirmed() {
+	//$('#pass-indicator-0').remove()  ---- Fix when fixing naalu indicators
+	$('#turnTracker').carousel('next');
+	$('#draggable-player-'+naaluPlayer.player).addClass('passed-player');
+	setTimeout(function() {
+		removeSlide(zeroSlide);
+	}, 1500);
 }
 
 
