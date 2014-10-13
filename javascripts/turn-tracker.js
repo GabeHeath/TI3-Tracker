@@ -7,6 +7,7 @@ jQuery(function($) {
 });
 
 var roundStarted = 0;
+var round = 1;
 
 var sc0Inactive = 0; //naalu
 var sc1Inactive = 0;
@@ -21,6 +22,8 @@ var sc8Inactive = 0;
 var zeroSlide = 0; //For naalu slide. Tells which SC player picked.
 var naaluPlayer = {player: 0, active: 0};
 
+var lp0_1 = {slide: 0, side: 1, card: 0};
+var lp0_2 = {slide: 0, side: 2, card: 0};
 var lp1_1 = {slide: 1, side: 1, card: 0};
 var lp1_2 = {slide: 1, side: 2, card: 0};
 var lp2_1 = {slide: 2, side: 1, card: 0};
@@ -30,17 +33,21 @@ var lp3_2 = {slide: 3, side: 2, card: 0};
 var lp4_1 = {slide: 4, side: 1, card: 0};
 var lp4_2 = {slide: 4, side: 2, card: 0};
 
+var pass_L0 = {lcard: 0, rcard: 0};
 var pass_L1 = {lcard: 0, rcard: 0};
 var pass_L2 = {lcard: 0, rcard: 0};
 var pass_L3 = {lcard: 0, rcard: 0};
 var pass_L4 = {lcard: 0, rcard: 0};
 
 var initialLowPlayerSetup = false;
+var initialLowPlayerNaaluSetup = false;
 
 var passSlideChoices = [];
 
 $(function() { //onload look for clicks.
 
+    $('#tracker-inner').on('click','#lp0-1', {val: '0_1'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp0-2', {val: '0_2'}, lowPlayerStatus);
 	$('#tracker-inner').on('click','#lp1-1', {val: '1_1'}, lowPlayerStatus);
 	$('#tracker-inner').on('click','#lp1-2', {val: '1_2'}, lowPlayerStatus);
 	$('#tracker-inner').on('click','#lp2-1', {val: '2_1'}, lowPlayerStatus);
@@ -50,116 +57,18 @@ $(function() { //onload look for clicks.
 	$('#tracker-inner').on('click','#lp4-1', {val: '4_1'}, lowPlayerStatus);
 	$('#tracker-inner').on('click','#lp4-2', {val: '4_2'}, lowPlayerStatus);
 
+	$('#tracker-inner').on('click','#pass-L0', {slide: 0}, lowPlayerPass);
 	$('#tracker-inner').on('click','#pass-L1', {slide: 1}, lowPlayerPass);
 	$('#tracker-inner').on('click','#pass-L2', {slide: 2}, lowPlayerPass);
 	$('#tracker-inner').on('click','#pass-L3', {slide: 3}, lowPlayerPass);
 	$('#tracker-inner').on('click','#pass-L4', {slide: 4}, lowPlayerPass);
 
+	$('#start-new-round-btn').click(newRoundReset);
+
 	// Set the names on the draggable items to the names in the players tab.
 	$('#tracker-tab').click(function(){
 
-		if (counter < 3) {
-			$('#start-tracker-text').hide();
-			$('#start-round-btn').hide();
-			$('#not-enough-players').show();
-		} else if (counter >= 3 && counter <= 4) {
-
-			$('#start-tracker-text').show();
-			$('#start-round-btn').show();
-			$('#not-enough-players').hide();
-
-			for(i=1; i<=4; i++) {
-				var name = $('#player_name_'+i).val();
-				if (name) {
-					$('#draggable-player-'+i+' > p').text(name+': 1');
-				} else {
-					$('#draggable-player-'+i+' > p').text('Bonus');
-				}
-			}
-
-			for(i=1; i<=4; i++) {
-				var name = $('#player_name_'+i).val();
-				if (name) {
-					$('#draggable-player-'+(i+4)+' > p').text(name+': 2');
-				} else {
-					$('#draggable-player-'+(i+4)+' > p').text('Bonus');
-				}
-			}
-
-		} else {
-
-			$('#start-tracker-text').show();
-			$('#start-round-btn').show();
-			$('#not-enough-players').hide();
-
-			for(i=1; i<=8; i++) {
-				var name = $('#player_name_'+i).val();
-				if (name) {
-					$('#draggable-player-'+i+' > p').text(name);
-				} else {
-					$('#draggable-player-'+i+' > p').text('Bonus');
-				}
-			}
-		}
-
-
-
-
-		//Set the Strategy Card names on the turn tracker.
-		for(i=1; i<=8; i++) {
-			$('#tracker-title-'+i).text($('#myCarousel-'+i+' > div > div.item.active > div > h3').text());
-			$('#sc-label-'+i).text($('#myCarousel-'+i+' > div > div.item.active > div > h3').text());
-		}
-
-		// Controls modal at when turn tracker tab is clicked.
-		if (roundStarted == 0) {
-			$('#startDialog').modal({backdrop:'static',keyboard:false, show:true}); //Modal appears, can't click outside of it or press keyboard to close. Have to click start.
-			$('.modal-backdrop').removeClass("modal-backdrop"); // Removes the backdrop so players can control the draggables.
-		}
-
-
-
-
-		dragPosition(); // Update slides info immediately to prevent slice error if you pass with no assigned player.
-		if (roundStarted == 1) {
-			removeBonusSlides();
-		}
-
-
-
-
-
-
-
-
-// if (counter < 5) { // 3 and 4 player tracker configuration starts here.
-// 			if (naaluPlayer.active == 1) { // Is there a naalu player?
-// 				for (i=8; i>=4; i--) {
-// 					$('#tracker-card-'+i).remove();
-// 					$('#pass-indicator-'+(i+1)).remove();
-// 				}
-
-
-// // Need to put 3-4 player Naalu code here
-
-
-// 			} else {
-// 				lowPlayerSetup();				
-// 			}
-
-
-
-// 		// } else {
-// 		// 	removeBonusSlides();  //because it's active below in the start-round button
-// 		} 
-
-
-
-
-
-
-
-
+		trackerTabClicked();
 
 
 	});
@@ -187,7 +96,7 @@ $(function() { //onload look for clicks.
 		roundStarted = 1;
 		disableDrag();
 
-		//See if there is a Naalu Player. They always go first in turn order.
+		//See if there is a Player. They always go first in turn order.
 		for (i=1; i<=8; i++) {
 		  if ($('#player_race_'+i).val() == "The Naalu Collective") {
 		    naaluPlayer = {player: i, active: 1};
@@ -196,7 +105,7 @@ $(function() { //onload look for clicks.
 
 		if (naaluPlayer.active == 1) {
 			//Activate slide 0
-			$('#tracker-inner').prepend("<div id='tracker-card-0' style='background: #827210;' class='active item'> <div id='tracker-slide-0-info' class='tracker-content-left tracker-content-0'> <div id='tracker-slide-0-name'></div><div id='race-player-0' class='crop'><img id='race-player-0-image' src='images/races/the_naalu_collective.png'></div><div id='tracker-slide-0-race'>The Naalu Collective</div> </div> <div class='tracker-content-right tracker-content-0'> <div>Actions</div> <div><button id='tracker-activate-0' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button></div> <br> <div><button id='pass-0' class='btn btn-large btn-block btn-default' type='button'>Pass</button></div> </div> <h2 style='margin: 0; color: #72640D; font-size: 270px;'>0</h2> <div class='carousel-caption'> <h3 id='tracker-title-0' class='tracker-card-name' style='font-size: 19px;'>Zero</h3> <br> </div> </div>");
+			$('#tracker-inner').prepend("<div id='tracker-card-0' style='background: #827210;' class='active item'> <div id='tracker-slide-0-info' class='tracker-content-left tracker-content-0'> <div id='tracker-slide-0-name'></div><div id='race-player-0' class='crop'><img id='race-player-0-image' src='images/races/the_naalu_collective.png'></div><div id='tracker-slide-0-race'>The Naalu Collective</div> </div> <div class='tracker-content-right tracker-content-0'> <div id='low-player-sc-0-2'>Actions</div> <div><button id='tracker-activate-0' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button></div> <br> <div id='lpbtn0'><button id='pass-0' class='btn btn-large btn-block btn-default' type='button'>Pass</button></div> </div> <h2 style='margin: 0; color: #72640D; font-size: 270px;'>0</h2> <div class='carousel-caption'> <h3 id='tracker-title-0' class='tracker-card-name' style='font-size: 19px;'>Zero</h3> <br> </div> </div>");
 			$('#tracker-card-1').removeClass('active');
 			// Add the Naalu player's name to slide
 			$('#tracker-slide-0-name').text($('#player_name_'+naaluPlayer.player).val());
@@ -209,36 +118,15 @@ $(function() { //onload look for clicks.
 
 
 
-// 		if (counter < 5) { // 3 and 4 player tracker configuration starts here.
-// 			if (naaluPlayer.active == 1) { // Is there a naalu player?
-// 				for (i=8; i>=4; i--) {
-// 					$('#tracker-card-'+i).remove();
-// 					$('#pass-indicator-'+(i+1)).remove();
-// 				}
+		if (counter < 5) { // 3 and 4 player tracker configuration starts here.
+			if (naaluPlayer.active == 1) { // Is there a naalu player?
+				lowPlayerNaaluSetup();
+			}
+		}
 
 
-// // Need to put 3-4 player Naalu code here
+		removeBonusSlides();
 
-
-// 			} else {
-// 				for (i=8; i>=5; i--) { //Remove the last 4 slides since 3-4 players loops and slide will share their 2 SCs.
-// 					$('#tracker-card-'+i).remove();
-// 					$('#pass-indicator-'+i).remove();
-// 				}
-
-// 				//Get draggable player's names for draggable 1-4 and put them on slides 1-4
-// 				for (i=1; i<=4; i++) {
-// 					var lpSlide2 = (jQuery.inArray('draggable-player-'+(i+4), draggablePlayerPosition))+1;
-// 					$('#low-player-sc-'+i+'-2').text($('#myCarousel-'+lpSlide2+' > div > div.item.active > div > h3').text());
-// 				}
-				
-// 			}
-
-
-
-// 		} 
-
-			removeBonusSlides();
 
 
 	});
@@ -430,38 +318,13 @@ function dragPosition(){
 	// with their positions
 
 
-
-
-
-
 if (counter < 5) { // 3 and 4 player tracker configuration starts here.
 	if (naaluPlayer.active == 1) { // Is there a naalu player?
-		for (i=8; i>=4; i--) {
-			$('#tracker-card-'+i).remove();
-			$('#pass-indicator-'+(i+1)).remove();
-		}
-
-
-// Need to put 3-4 player Naalu code here
-
-
+		lowPlayerNaaluSetup();
 	} else {
 		lowPlayerSetup();		
 	}
-
-
-
 } else {
-
-
-
-
-
-
-
-
-
-
 
 	// Set the tracker slides to have the proper names
 	for (i=0; i<=7; i++) {
@@ -699,8 +562,8 @@ function passButtonClicked(event) {
 
 // When pass confirmed in pass dialog modal
 function passConfirmed(event) {
-	$('#pass-indicator-'+event.data.passed).remove()
 	$('#turnTracker').carousel('next');
+	$('#pass-indicator-'+event.data.passed).remove()
 	// This is a doozy. Ok - So it takes the draggable-player-x id. Those id's are assigned to each of the draggable
 	// player items in order of how players are organized in the Player tab. This function removes slides and changes these
 	// draggable items to black. Since players move around you have to find which player is assigned to the Strategy Card slide.
@@ -713,7 +576,7 @@ function passConfirmed(event) {
 	$('#draggable-player-'+ ((draggablePlayerPosition[(event.data.passed)-1]).slice(-1))).addClass('passed-player');
 	setTimeout(function() {
 		removeSlide(event.data.passed);
-	}, 1500);
+	}, 1200); //1500
 
 }
 
@@ -767,7 +630,6 @@ function statusOfSlide0() {
 }
 
 function passButtonZeroClicked() {
-
 	if (sc0Inactive == 0) {
 		$('#sc-not-played').show();
 		$('#pass-close').show();
@@ -790,12 +652,11 @@ function passButtonZeroClicked() {
 }
 
 function slideZeroPassConfirmed() {
-	//$('#pass-indicator-0').remove()  ---- Fix when fixing naalu indicators
 	$('#turnTracker').carousel('next');
 	$('#draggable-player-'+naaluPlayer.player).addClass('passed-player');
 	setTimeout(function() {
-		removeSlide(zeroSlide);
-	}, 1500);
+		removeSlide(0);
+	}, 1200); //1500
 }
 
 
@@ -970,8 +831,16 @@ function lowPlayerPass(values) {
 }
 
 function lowPlayerPassConfirmed(values) {
-	$('#pass-indicator-'+values.data.slide).remove()
+
 	$('#turnTracker').carousel('next');
+
+	if (values.data.slide == 0) {
+		$('#pass-indicator-1').remove()
+	} else {
+		$('#pass-indicator-'+values.data.slide).remove()
+	}
+	
+	
 	
 	passCard1 = draggablePlayerPosition[values.data.lcard-1];
 	passCard2 = draggablePlayerPosition[values.data.rcard-1];
@@ -981,7 +850,7 @@ function lowPlayerPassConfirmed(values) {
 	
 	setTimeout(function() {
 		lowPlayerRemoveSlide(values.data.slide);
-	}, 1500);
+	}, 1200); //1500
 }
 
 function lowPlayerRemoveSlide(slide) {
@@ -998,6 +867,267 @@ function lowPlayerRemoveSlide(slide) {
 		$('#new-game-round').show();
 	}
 
+}
+
+
+function lowPlayerNaaluSetup() {
+	var lowPlayerTurnOrder = [];
+	var lowPlayerSlideChoices = [];
+	//Get all player names and push to lpturorder array. Then remove duplicates.
+	for (i=1; i<=8; i++) {
+		var item = draggablePlayerPosition[(i-1)].slice(-1)-0; // -0 forces type of int.
+		if (item > 4) {
+			item = item - 4;
+		}
+		var found = jQuery.inArray(item, lowPlayerTurnOrder);
+
+		if (found >= 0) {
+    		// Element was found, don't push to order array.
+    		lowPlayerSlideChoices.push(item);
+		} else {
+    		// Element was not found, add it.
+    		lowPlayerTurnOrder.push(item);
+    		lowPlayerSlideChoices.push(item);
+		}
+	}
+
+	var lowPlayerSortedSlideChoices = [];
+		for (j=0; j<= lowPlayerTurnOrder.length; j++) {
+			var value = lowPlayerTurnOrder[j];
+
+			for (k=0; k<=7; k++) {
+				if (lowPlayerSlideChoices[k] == value) {
+					lowPlayerSortedSlideChoices.push(k+1);
+				}
+			}
+		}
+
+	passSlideChoices = lowPlayerSlideChoices;
+
+
+	for (i=8; i>=5; i--) { //Remove the last 5 slides since 3-4 players loops and slide will share their 2 SCs. Plus one more since Naalu replaces.
+		$('#tracker-card-'+i).remove();
+		$('#pass-indicator-'+i).remove();
+	}
+
+	//Get draggable player's names for draggable 1-4 and put them on slides 1-4
+	
+		var cssArray = ['#AA4242','#E06E38','#DDD400','#214B23','#3D9748','#32948C','#224983','#543969']; //hex values of all SC colors.
+		
+
+		if (!initialLowPlayerNaaluSetup){ // Only do this stuff once at the beginning.
+			for (i=0; i<=4; i++) {
+				// Remove large number indicator
+				$('#tracker-card-'+i+' > h2').remove();
+				// Move left info box to middle and make it gray.
+				$('#tracker-slide-'+ i +'-info').css({'left':'37.8%','background-color':'#606264'});
+				// Add a pass button to the middle info box.
+				$('#tracker-slide-'+ i +'-race').html('<button style=\'margin-top: 9px; z-index: 999; \' id=\'pass-L'+i+'\'  class=\'btn btn-large btn-block btn-default\' type=\'button\'>Pass</button>');	
+				// Move right info box a little more right to make spacing equal. 
+				$('#tracker-card-'+i+' > div.tracker-content-right.tracker-content-'+i+'').attr('style', 'right:10%');
+				// Change entire slide background to dark
+				$('#tracker-card-'+i).attr('style','background-color:#333');
+				// Remove old pass button since we have a new one for 3-4 players
+				$('#pass-'+i).remove();
+				// Remove old activate button since we need new ones.
+				$('#tracker-activate-'+i).remove();
+				// Create a new left-most box.
+				$('#tracker-card-'+i).prepend('<div style=\'left:10.5%;\'class=\'tracker-content-right tracker-content-'+ i +'\'><div id=\'low-player-sc-'+i+'-1\'>SC</div><div></div><br><div><button id=\'lp'+i+'-1\' class=\'btn btn-block btn-default\' style=\'margin-top:20px;\'>Status: Active</button></div></div>');
+				// Add Status button to right-info box
+				$('#lpbtn'+i).html('<button id=\'lp'+i+'-2\' class=\'btn btn-block btn-default\' style=\'margin-top:20px;\'>Status: Active</button>');
+				initialLowPlayerSetup = true;
+
+				$('#tracker-title-0').text($('#player_name_'+naaluPlayer.player).val());
+				$('#tracker-slide-0-name').text('The Naalu Collective');
+				$('#race-player-0-image').attr('style', 'width:100px');
+			}
+		}
+
+
+	for (i=1; i<=4; i++) {
+		// Set slide title to player's name if they aren't the naalu player because that is done in the initial setup.
+		if (i != naaluPlayer.player) {
+			$('#tracker-title-'+i).text($('#player_name_'+lowPlayerTurnOrder[(i-1)]).val());
+		}
+
+		// Change the player name to race's name since player name is in the <h1>
+		$('#tracker-slide-'+ i +'-name').text($('#player_race_'+lowPlayerTurnOrder[(i-1)]).val());
+			if ( $('#tracker-slide-'+ i +'-name').text() == "The Sardakk Norr") {
+				$('#tracker-slide-'+i+'-name').text("The Sardakk N'orr"); // Special case for the Sardakk because their apostraphe screws everything up.
+			}
+		// Add race image
+		var raceImage = 'images/races/'+ showRaceImage($('#player_race_'+ lowPlayerTurnOrder[(i-1)]).val()) +'.png'; //Get the player's race value from the Player's Tab
+		// Put it in the showRaceImage function which returns the image file needed to load for that race.
+
+		if ($('#race-player-'+ lowPlayerTurnOrder[(i-1)])) { // If an image is already in place, remove it so the new one doesn't keep pushing the divs down.
+			$('#race-player-'+ lowPlayerTurnOrder[(i-1)]).remove();
+		}
+
+		$('<div id="race-player-'+lowPlayerTurnOrder[(i-1)]+'" class="crop"><img id="race-player-'+lowPlayerTurnOrder[(i-1)]+'-image" src='+raceImage+'></div>').insertAfter('#tracker-slide-'+i+'-name'); // Put the new image right after the name.
+
+		//Special Conditions for stylings of SotT races
+		if (raceImage == 'images/races/the-arborec.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 84px;');
+		} else if (raceImage == 'images/races/the-ghosts-of-creuss.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 90px;');
+		} else if (raceImage == 'images/races/the-nekro-virus.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 111px;');
+		} else if (raceImage == 'images/races/lazax.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 118px;');
+		} else { 
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style', 'width:100px');
+		}
+		$('.crop').css({'width':'200px','height':'100px'});
+		
+		// Set left and right info box names to chosen Strategy cards
+		temp1 = lowPlayerSortedSlideChoices.shift();
+		temp2 = lowPlayerSortedSlideChoices.shift();
+
+		console.log('t1: '+temp1);
+		console.log('t2: '+temp2);
+		console.log('to: '+lowPlayerTurnOrder);
+		console.log((jQuery).inArray(naaluPlayer.player,lowPlayerTurnOrder));
+
+
+		if (i != ((jQuery).inArray(naaluPlayer.player,lowPlayerTurnOrder)+1)) {
+			$('#low-player-sc-'+i+'-1').text($('#myCarousel-'+temp1+' > div > div.item.active > div > h3').text());
+			$('#low-player-sc-'+i+'-2').text($('#myCarousel-'+temp2+' > div > div.item.active > div > h3').text());
+		} else {
+			$('#low-player-sc-0-1').text($('#myCarousel-'+temp1+' > div > div.item.active > div > h3').text());
+			$('#low-player-sc-0-2').text($('#myCarousel-'+temp2+' > div > div.item.active > div > h3').text());
+		}
+
+		//Change the background colors of the left and right strategy cards to match choices.
+		if (i != ((jQuery).inArray(naaluPlayer.player,lowPlayerTurnOrder)+1)) {
+			$('#low-player-sc-'+i+'-1').parent().css({'background-color': cssArray[temp1-1]});
+			$('#low-player-sc-'+i+'-2').parent().css({'background-color': cssArray[temp2-1]});
+		} else {
+			$('#low-player-sc-0-1').parent().css({'background-color': cssArray[temp1-1]});
+			$('#low-player-sc-0-2').parent().css({'background-color': cssArray[temp2-1]});
+		}
+
+		if (i != ((jQuery).inArray(naaluPlayer.player,lowPlayerTurnOrder)+1)) {
+			window['lp'+i+'_1'].card = temp1;
+			window['lp'+i+'_2'].card = temp2;
+
+			window['pass_L'+i].lcard = temp1;
+			window['pass_L'+i].rcard = temp2;
+		} else {
+			lp0_1.card = temp1;
+			lp0_2.card = temp2;
+			pass_L0.lcard = temp1;
+			pass_L0.rcard = temp2;
+		}
+
+
+	}
+
+	for (i=1; i<=4; i++) {
+		if ($('#low-player-sc-'+i+'-1').text() == "SC") {
+			$('#tracker-card-'+i).remove();
+		}
+	}
+	
+}
+
+
+function newRoundReset() {
+	round++;
+	roundStarted = 0;
+
+	$('#round-counter').text('Round: '+round);
+	$('#new-game-round').hide();
+	//Remove all turn tracker content and add refreshed content.
+	$('#turnTracker').remove();
+	$('#turn-tracker').prepend("<div style='width: 75%; margin-left: 12.5%;' id='turnTracker' class='carousel slide' data-interval='0' data-ride='carousel'> <!-- Carousel indicators --> <ol class='carousel-indicators'> <li id='pass-indicator-1' data-target='#turnTracker' data-slide-to='0' class='active'></li> <li id='pass-indicator-2' data-target='#turnTracker' data-slide-to='1'></li> <li id='pass-indicator-3' data-target='#turnTracker' data-slide-to='2'></li> <li id='pass-indicator-4' data-target='#turnTracker' data-slide-to='3'></li> <li id='pass-indicator-5' data-target='#turnTracker' data-slide-to='4'></li> <li id='pass-indicator-6' data-target='#turnTracker' data-slide-to='5'></li> <li id='pass-indicator-7' data-target='#turnTracker' data-slide-to='6'></li> <li id='pass-indicator-8' data-target='#turnTracker' data-slide-to='7'></li> </ol> <!-- Carousel items --> <div id='tracker-inner' class='carousel-inner'> <div id='tracker-card-1' style='background: #AA4242;' class='active item'> <div id='tracker-slide-1-info' class='tracker-content-left tracker-content-1'> <div id='tracker-slide-1-name'></div> <div id='tracker-slide-1-race'></div> </div> <div class='tracker-content-right tracker-content-1'> <div id='low-player-sc-1-2'>Actions</div> <div> <button id='tracker-activate-1' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div id='lpbtn1'> <button id='pass-1' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #943939; font-size: 270px;'>1</h2> <div class='carousel-caption'> <h3 id='tracker-title-1' class='tracker-card-name' style='font-size: 19px;'>One</h3> <br> </div> </div> <div id='tracker-card-2' style='background: #E06E38;' class='item'> <div id='tracker-slide-2-info' class='tracker-content-left tracker-content-2'> <div id='tracker-slide-2-name'></div> <div id='tracker-slide-2-race'></div> </div> <div class='tracker-content-right tracker-content-2'> <div id='low-player-sc-2-2'>Actions</div> <div> <button id='tracker-activate-2' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div id='lpbtn2'> <button id='pass-2' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #CC6433; font-size: 270px;'>2</h2> <div class='carousel-caption'> <h3 id='tracker-title-2' class='tracker-card-name' style='font-size: 19px;'>Two</h3> <br> </div> </div> <div id='tracker-card-3' style='background: #DDD400;' class='item'> <div id='tracker-slide-3-info' class='tracker-content-left tracker-content-3'> <div id='tracker-slide-3-name'></div> <div id='tracker-slide-3-race'></div> </div> <div class='tracker-content-right tracker-content-3'> <div id='low-player-sc-3-2'>Actions</div> <div> <button id='tracker-activate-3' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div id='lpbtn3'> <button id='pass-3' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #CEC500; font-size: 270px;'>3</h2> <div class='carousel-caption'> <h3 id='tracker-title-3' class='tracker-card-name' style='font-size: 19px;'>Three</h3> <br> </div> </div> <div id='tracker-card-4' style='background: #214B23;' class='item'> <div id='tracker-slide-4-info' class='tracker-content-left tracker-content-4'> <div id='tracker-slide-4-name'></div> <div id='tracker-slide-4-race'></div> </div> <div class='tracker-content-right tracker-content-4'> <div id='low-player-sc-4-2'>Actions</div> <div> <button id='tracker-activate-4' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div id='lpbtn4'> <button id='pass-4' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #1C3F1E; font-size: 270px;'>4</h2> <div class='carousel-caption'> <h3 id='tracker-title-4' class='tracker-card-name' style='font-size: 19px;'>Four</h3> <br> </div> </div> <div id='tracker-card-5' style='background: #3D9748;' class='item'> <div id='tracker-slide-5-info' class='tracker-content-left tracker-content-5'> <div id='tracker-slide-5-name'></div> <div id='tracker-slide-5-race'></div> </div> <div class='tracker-content-right tracker-content-5'> <div>Actions</div> <div> <button id='tracker-activate-5' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div> <button id='pass-5' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #378A41; font-size: 270px;'>5</h2> <div class='carousel-caption'> <h3 id='tracker-title-5' class='tracker-card-name' style='font-size: 19px;'>Five</h3> <br> </div> </div> <div id='tracker-card-6' style='background: #32948C;' class='item'> <div id='tracker-slide-6-info' class='tracker-content-left tracker-content-6'> <div id='tracker-slide-6-name'></div> <div id='tracker-slide-6-race'></div> </div> <div class='tracker-content-right tracker-content-6'> <div>Actions</div> <div> <button id='tracker-activate-6' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div> <button id='pass-6' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #2C8881; font-size: 270px;'>6</h2> <div class='carousel-caption'> <h3 id='tracker-title-6' class='tracker-card-name' style='font-size: 19px;'>Six</h3> <br> </div> </div> <div id='tracker-card-7' style='background: #224983;' class='item'> <div id='tracker-slide-7-info' class='tracker-content-left tracker-content-7'> <div id='tracker-slide-7-name'></div> <div id='tracker-slide-7-race'></div> </div> <div class='tracker-content-right tracker-content-7'> <div>Actions</div> <div> <button id='tracker-activate-7' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div> <button id='pass-7' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #1D3F72; font-size: 270px;'>7</h2> <div class='carousel-caption'> <h3 id='tracker-title-7' class='tracker-card-name' style='font-size: 19px;'>Seven</h3> <br> </div> </div> <div id='tracker-card-8' style='background: #543969;' class='item'> <div id='tracker-slide-8-info' class='tracker-content-left tracker-content-8'> <div id='tracker-slide-8-name'></div> <div id='tracker-slide-8-race'></div> </div> <div class='tracker-content-right tracker-content-8'> <div>Actions</div> <div> <button id='tracker-activate-8' style='margin-top: 20px;' class='btn btn-large btn-block btn-default' type='button'>Status: Activate</button> </div> <br> <div> <button id='pass-8' class='btn btn-large btn-block btn-default' type='button'>Pass</button> </div> </div> <h2 style='margin: 0; color: #4B335E; font-size: 270px;'>8</h2> <div class='carousel-caption'> <h3 id='tracker-title-8' class='tracker-card-name' style='font-size: 19px;'>Eight</h3> <br> </div> </div> </div> <!-- Carousel nav --> <a id='tracker-left-nav' class='carousel-control left' href='#turnTracker' data-slide='prev'> <span class='glyphicon glyphicon-chevron-left'></span> </a> <a id='tracker-right-nav' class='carousel-control right' href='#turnTracker' data-slide='next'> <span class='glyphicon glyphicon-chevron-right'></span> </a></div>");
+	//Simulate tracker tab click
+	trackerTabClicked();
+	//Reset draggable css
+	for (i=1; i<=8; i++) {
+		$('#draggable-player-'+i).removeClass('passed-player');
+		$('#sc-label-'+i).removeAttr('style');
+	}
+	//Enable Drag
+	for (i=1; i<=8; i++) {
+		$('#draggable-player-'+i).css({'box-shadow':'10px 10px 5px #888888','cursor':'move'}); //Removes some CSS that makes it look draggable.
+		$('.tracker-sc-label').attr('style','box-shadow: 10px 10px 5px #888888');
+	}
+
+	$('.move-icon').show();
+	$('.lock-icon').hide();
+	$("#sortable").sortable({ disabled: false });
+
+
+
+}
+
+function trackerTabClicked() {
+	if (counter < 3) {
+			$('#start-tracker-text').hide();
+			$('#start-round-btn').hide();
+			$('#not-enough-players').show();
+		} else if (counter >= 3 && counter <= 4) {
+
+			$('#start-tracker-text').show();
+			$('#start-round-btn').show();
+			$('#not-enough-players').hide();
+
+			for(i=1; i<=4; i++) {
+				var name = $('#player_name_'+i).val();
+				if (name) {
+					$('#draggable-player-'+i+' > p').text(name+': 1');
+				} else {
+					$('#draggable-player-'+i+' > p').text('Bonus');
+				}
+			}
+
+			for(i=1; i<=4; i++) {
+				var name = $('#player_name_'+i).val();
+				if (name) {
+					$('#draggable-player-'+(i+4)+' > p').text(name+': 2');
+				} else {
+					$('#draggable-player-'+(i+4)+' > p').text('Bonus');
+				}
+			}
+
+		} else {
+
+			$('#start-tracker-text').show();
+			$('#start-round-btn').show();
+			$('#not-enough-players').hide();
+
+			for(i=1; i<=8; i++) {
+				var name = $('#player_name_'+i).val();
+				if (name) {
+					$('#draggable-player-'+i+' > p').text(name);
+				} else {
+					$('#draggable-player-'+i+' > p').text('Bonus');
+				}
+			}
+		}
+
+
+
+
+		//Set the Strategy Card names on the turn tracker.
+		for(i=1; i<=8; i++) {
+			$('#tracker-title-'+i).text($('#myCarousel-'+i+' > div > div.item.active > div > h3').text());
+			$('#sc-label-'+i).text($('#myCarousel-'+i+' > div > div.item.active > div > h3').text());
+		}
+
+		// Controls modal at when turn tracker tab is clicked.
+		if (roundStarted == 0) {
+			$('#startDialog').modal({backdrop:'static',keyboard:false, show:true}); //Modal appears, can't click outside of it or press keyboard to close. Have to click start.
+			$('.modal-backdrop').removeClass("modal-backdrop"); // Removes the backdrop so players can control the draggables.
+		}
+
+
+
+
+		dragPosition(); // Update slides info immediately to prevent slice error if you pass with no assigned player.
+		if (roundStarted == 1) {
+			removeBonusSlides();
+		}
 }
 
 

@@ -1,10 +1,7 @@
 Turn tracker todo:
 
-Fix slide indicators when Naalu slide present
 
 Rework 3-4 players so the order goes from the lowest SC and loops. Trim to 3 or 4 slides with information for both SC's chosen.
-
-find a better way to hide arrows if only one slide left. If bonuses remove a slide then it doens't work. I think. Maybe if you click pass on last slide it will.
 
 create restore slides function for new round.
 
@@ -17,11 +14,13 @@ fix bugs for when people move stuff around in tracker after the round has starte
 Keep position value saved so it can be resumed upon refresh.
 After all have passed end round and increment round counter.
 
+Style round start and pass modals better
 
 --------------------------------------
 Eventually make real README
 
 Stop Duplicate race selection
+Prevent race change to naalu after round start.
 
 Make Race images appear on Player tab once saved.
 
