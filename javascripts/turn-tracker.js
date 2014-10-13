@@ -21,8 +21,39 @@ var sc8Inactive = 0;
 var zeroSlide = 0; //For naalu slide. Tells which SC player picked.
 var naaluPlayer = {player: 0, active: 0};
 
+var lp1_1 = {slide: 1, side: 1, card: 0};
+var lp1_2 = {slide: 1, side: 2, card: 0};
+var lp2_1 = {slide: 2, side: 1, card: 0};
+var lp2_2 = {slide: 2, side: 2, card: 0};
+var lp3_1 = {slide: 3, side: 1, card: 0};
+var lp3_2 = {slide: 3, side: 2, card: 0};
+var lp4_1 = {slide: 4, side: 1, card: 0};
+var lp4_2 = {slide: 4, side: 2, card: 0};
+
+var pass_L1 = {lcard: 0, rcard: 0};
+var pass_L2 = {lcard: 0, rcard: 0};
+var pass_L3 = {lcard: 0, rcard: 0};
+var pass_L4 = {lcard: 0, rcard: 0};
+
+var initialLowPlayerSetup = false;
+
+var passSlideChoices = [];
+
 $(function() { //onload look for clicks.
 
+	$('#tracker-inner').on('click','#lp1-1', {val: '1_1'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp1-2', {val: '1_2'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp2-1', {val: '2_1'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp2-2', {val: '2_2'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp3-1', {val: '3_1'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp3-2', {val: '3_2'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp4-1', {val: '4_1'}, lowPlayerStatus);
+	$('#tracker-inner').on('click','#lp4-2', {val: '4_2'}, lowPlayerStatus);
+
+	$('#tracker-inner').on('click','#pass-L1', {slide: 1}, lowPlayerPass);
+	$('#tracker-inner').on('click','#pass-L2', {slide: 2}, lowPlayerPass);
+	$('#tracker-inner').on('click','#pass-L3', {slide: 3}, lowPlayerPass);
+	$('#tracker-inner').on('click','#pass-L4', {slide: 4}, lowPlayerPass);
 
 	// Set the names on the draggable items to the names in the players tab.
 	$('#tracker-tab').click(function(){
@@ -95,6 +126,42 @@ $(function() { //onload look for clicks.
 		}
 
 
+
+
+
+
+
+
+// if (counter < 5) { // 3 and 4 player tracker configuration starts here.
+// 			if (naaluPlayer.active == 1) { // Is there a naalu player?
+// 				for (i=8; i>=4; i--) {
+// 					$('#tracker-card-'+i).remove();
+// 					$('#pass-indicator-'+(i+1)).remove();
+// 				}
+
+
+// // Need to put 3-4 player Naalu code here
+
+
+// 			} else {
+// 				lowPlayerSetup();				
+// 			}
+
+
+
+// 		// } else {
+// 		// 	removeBonusSlides();  //because it's active below in the start-round button
+// 		} 
+
+
+
+
+
+
+
+
+
+
 	});
 
 
@@ -119,7 +186,6 @@ $(function() { //onload look for clicks.
 	$('#start-round-btn').click(function(){
 		roundStarted = 1;
 		disableDrag();
-		removeBonusSlides();
 
 		//See if there is a Naalu Player. They always go first in turn order.
 		for (i=1; i<=8; i++) {
@@ -142,6 +208,39 @@ $(function() { //onload look for clicks.
 		}
 
 
+
+// 		if (counter < 5) { // 3 and 4 player tracker configuration starts here.
+// 			if (naaluPlayer.active == 1) { // Is there a naalu player?
+// 				for (i=8; i>=4; i--) {
+// 					$('#tracker-card-'+i).remove();
+// 					$('#pass-indicator-'+(i+1)).remove();
+// 				}
+
+
+// // Need to put 3-4 player Naalu code here
+
+
+// 			} else {
+// 				for (i=8; i>=5; i--) { //Remove the last 4 slides since 3-4 players loops and slide will share their 2 SCs.
+// 					$('#tracker-card-'+i).remove();
+// 					$('#pass-indicator-'+i).remove();
+// 				}
+
+// 				//Get draggable player's names for draggable 1-4 and put them on slides 1-4
+// 				for (i=1; i<=4; i++) {
+// 					var lpSlide2 = (jQuery.inArray('draggable-player-'+(i+4), draggablePlayerPosition))+1;
+// 					$('#low-player-sc-'+i+'-2').text($('#myCarousel-'+lpSlide2+' > div > div.item.active > div > h3').text());
+// 				}
+				
+// 			}
+
+
+
+// 		} 
+
+			removeBonusSlides();
+
+
 	});
 
 
@@ -152,13 +251,32 @@ $(function() { //onload look for clicks.
 
 
 	// Dragging a name updates the slider. Time out to make sure draggable is back in the list (due to revert being kind
-	// of slow) before calculating the position of the draggable elements.
+	// of slow) before calculating the position of the draggable elements. Had to put an event listener becasue mouseup outside
+    // of the draggable element wasn't firing.
+	var mouseDown = false;
+	var draggables = document.getElementById('sortable');
 
-	for (i=1; i<=8; i++) {
-		$('#draggable-player-'+i).mouseup(function(){
-			setTimeout(dragPosition,100); //Originially 2000 if .sortable revert = true
-		});
-	}
+	draggables.addEventListener('mousedown', function(e){
+	    mouseDown = true;
+	});
+
+	document.documentElement.addEventListener('mouseup', function(e){
+	    if (mouseDown) {
+	    	setTimeout(dragPosition,100);
+	    	mouseDown = false;
+	    }
+	}); 
+
+
+
+
+
+
+
+
+
+
+
 
 	// Changes stuff when Activate is clicked in the slides. For some reason could make these as for loops like the button above.
 	$('#tracker-activate-1').click(function() {
@@ -311,6 +429,40 @@ function dragPosition(){
 	draggablePlayerPosition = $('#sortable').sortable("toArray"); // When ever a draggable element is clicked update the array
 	// with their positions
 
+
+
+
+
+
+if (counter < 5) { // 3 and 4 player tracker configuration starts here.
+	if (naaluPlayer.active == 1) { // Is there a naalu player?
+		for (i=8; i>=4; i--) {
+			$('#tracker-card-'+i).remove();
+			$('#pass-indicator-'+(i+1)).remove();
+		}
+
+
+// Need to put 3-4 player Naalu code here
+
+
+	} else {
+		lowPlayerSetup();		
+	}
+
+
+
+} else {
+
+
+
+
+
+
+
+
+
+
+
 	// Set the tracker slides to have the proper names
 	for (i=0; i<=7; i++) {
 		player = (draggablePlayerPosition[i]).slice(-1); //Get the last character of each array element. It will be a number 1-8.
@@ -448,6 +600,7 @@ function dragPosition(){
 		}
 	}
 }
+}
 
 function showRaceImage(race) {
 	switch (race) {
@@ -529,7 +682,7 @@ function passButtonClicked(event) {
 		$('#pass-confirm-message').hide();
 		$('#pass-cancel').hide();
 		$('#pass-activate').hide();
-		$('#passConfirmLabel').text("Alert");
+		$('#passConfirmLabel').text("Attention");
 	} else {
 		$('#sc-not-played').hide();
 		$('#pass-close').hide();
@@ -596,7 +749,7 @@ function removeBonusSlides() {
 
 
 function statusOfSlide0() {
-	cssArray = ['#AA4242','#E06E38','#DDD400','#214B23','#3D9748','#32948C','#224983','#543969']; //hex values of all SC labels so naalu can restore if unactivated.
+	var cssArray = ['#AA4242','#E06E38','#DDD400','#214B23','#3D9748','#32948C','#224983','#543969']; //hex values of all SC labels so naalu can restore if unactivated.
 
 	if (sc0Inactive == 0) {
 		sc0Inactive = 1;
@@ -621,7 +774,7 @@ function passButtonZeroClicked() {
 		$('#pass-confirm-message').hide();
 		$('#pass-cancel').hide();
 		$('#pass-activate').hide();
-		$('#passConfirmLabel').text("Alert");
+		$('#passConfirmLabel').text("Attention");
 	} else {
 		$('#sc-not-played').hide();
 		$('#pass-close').hide();
@@ -643,6 +796,208 @@ function slideZeroPassConfirmed() {
 	setTimeout(function() {
 		removeSlide(zeroSlide);
 	}, 1500);
+}
+
+
+function lowPlayerSetup() {
+	var lowPlayerTurnOrder = [];
+	var lowPlayerSlideChoices = [];
+	//Get all player names and push t lpturorder array. Then remove duplicates.
+	for (i=1; i<=8; i++) {
+		var item = draggablePlayerPosition[(i-1)].slice(-1)-0; // -0 forces type of int.
+		if (item > 4) {
+			item = item - 4;
+		}
+		var found = jQuery.inArray(item, lowPlayerTurnOrder);
+
+		if (found >= 0) {
+    		// Element was found, don't push to order array.
+    		lowPlayerSlideChoices.push(item);
+		} else {
+    		// Element was not found, add it.
+    		lowPlayerTurnOrder.push(item);
+    		lowPlayerSlideChoices.push(item);
+		}
+	}
+
+	var lowPlayerSortedSlideChoices = [];
+		for (j=0; j<= lowPlayerTurnOrder.length; j++) {
+			var value = lowPlayerTurnOrder[j];
+
+			for (k=0; k<=7; k++) {
+				if (lowPlayerSlideChoices[k] == value) {
+					lowPlayerSortedSlideChoices.push(k+1);
+				}
+			}
+		}
+
+	passSlideChoices = lowPlayerSlideChoices;
+
+
+	for (i=8; i>=5; i--) { //Remove the last 4 slides since 3-4 players loops and slide will share their 2 SCs.
+		$('#tracker-card-'+i).remove();
+		$('#pass-indicator-'+i).remove();
+	}
+
+	//Get draggable player's names for draggable 1-4 and put them on slides 1-4
+	
+		var cssArray = ['#AA4242','#E06E38','#DDD400','#214B23','#3D9748','#32948C','#224983','#543969']; //hex values of all SC colors.
+		
+
+		if (!initialLowPlayerSetup){ // Only do this stuff once at the beginning.
+			for (i=1; i<=4; i++) {
+				// Remove large number indicator
+				$('#tracker-card-'+i+' > h2').remove();
+				// Move left info box to middle and make it gray.
+				$('#tracker-slide-'+ i +'-info').css({'left':'37.8%','background-color':'#606264'});
+				// Add a pass button to the middle info box.
+				$('#tracker-slide-'+ i +'-race').html('<button style=\'margin-top: 9px; z-index: 999; \' id=\'pass-L'+i+'\'  class=\'btn btn-large btn-block btn-default\' type=\'button\'>Pass</button>');	
+				// Move right info box a little more right to make spacing equal. 
+				$('#tracker-card-'+i+' > div.tracker-content-right.tracker-content-'+i+'').attr('style', 'right:10%');
+				// Change entire slide background to dark
+				$('#tracker-card-'+i).attr('style','background-color:#333');
+				// Remove old pass button since we have a new one for 3-4 players
+				$('#pass-'+i).remove();
+				// Remove old activate button since we need new ones.
+				$('#tracker-activate-'+i).remove();
+				// Create a new left-most box.
+				$('#tracker-card-'+i).prepend('<div style=\'left:10.5%;\'class=\'tracker-content-right tracker-content-'+ i +'\'><div id=\'low-player-sc-'+i+'-1\'>SC</div><div></div><br><div><button id=\'lp'+i+'-1\' class=\'btn btn-block btn-default\' style=\'margin-top:20px;\'>Status: Active</button></div></div>');
+				// Add Status button to right-info box
+				$('#lpbtn'+i).html('<button id=\'lp'+i+'-2\' class=\'btn btn-block btn-default\' style=\'margin-top:20px;\'>Status: Active</button>');
+				initialLowPlayerSetup = true;
+			}
+		}
+
+
+	for (i=1; i<=4; i++) {
+		// Set slide title to player's name
+		$('#tracker-title-'+i).text($('#player_name_'+lowPlayerTurnOrder[(i-1)]).val());
+		
+		// Change the player name to race's name since player name is in the <h1>
+		$('#tracker-slide-'+ i +'-name').text($('#player_race_'+lowPlayerTurnOrder[(i-1)]).val());
+			if ( $('#tracker-slide-'+ i +'-name').text() == "The Sardakk Norr") {
+				$('#tracker-slide-'+i+'-name').text("The Sardakk N'orr"); // Special case for the Sardakk because their apostraphe screws everything up.
+			}
+		// Add race image
+		var raceImage = 'images/races/'+ showRaceImage($('#player_race_'+ lowPlayerTurnOrder[(i-1)]).val()) +'.png'; //Get the player's race value from the Player's Tab
+		// Put it in the showRaceImage function which returns the image file needed to load for that race.
+
+		if ($('#race-player-'+ lowPlayerTurnOrder[(i-1)])) { // If an image is already in place, remove it so the new one doesn't keep pushing the divs down.
+			$('#race-player-'+ lowPlayerTurnOrder[(i-1)]).remove();
+		}
+
+		$('<div id="race-player-'+lowPlayerTurnOrder[(i-1)]+'" class="crop"><img id="race-player-'+lowPlayerTurnOrder[(i-1)]+'-image" src='+raceImage+'></div>').insertAfter('#tracker-slide-'+i+'-name'); // Put the new image right after the name.
+
+		//Special Conditions for stylings of SotT races
+		if (raceImage == 'images/races/the-arborec.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 84px;');
+		} else if (raceImage == 'images/races/the-ghosts-of-creuss.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 90px;');
+		} else if (raceImage == 'images/races/the-nekro-virus.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 111px;');
+		} else if (raceImage == 'images/races/lazax.png') {
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style','width: 118px;');
+		} else { 
+			$('#race-player-'+lowPlayerTurnOrder[(i-1)]+'-image').attr('style', 'width:100px');
+		}
+		$('.crop').css({'width':'200px','height':'100px'});
+		
+		// Set left and right info box names to chosen Strategy cards
+		temp1 = lowPlayerSortedSlideChoices.shift();
+		temp2 = lowPlayerSortedSlideChoices.shift();
+
+		$('#low-player-sc-'+i+'-1').text($('#myCarousel-'+temp1+' > div > div.item.active > div > h3').text());
+		$('#low-player-sc-'+i+'-2').text($('#myCarousel-'+temp2+' > div > div.item.active > div > h3').text());
+
+		//Change the background colors of the left and right strategy cards to match choices.
+		$('#low-player-sc-'+i+'-1').parent().css({'background-color': cssArray[temp1-1]});
+		$('#low-player-sc-'+i+'-2').parent().css({'background-color': cssArray[temp2-1]});
+
+		window['lp'+i+'_1'].card = temp1;
+		window['lp'+i+'_2'].card = temp2;
+
+		window['pass_L'+i].lcard = temp1;
+		window['pass_L'+i].rcard = temp2;
+
+
+	}
+	
+}
+
+
+function lowPlayerStatus(values) {
+	var cssArray = ['#AA4242','#E06E38','#DDD400','#214B23','#3D9748','#32948C','#224983','#543969'];
+	var slide = window['lp'+values.data.val].slide;
+	var side = window['lp'+values.data.val].side;
+	var card = window['lp'+values.data.val].card;
+
+	if (window['sc'+card+'Inactive'] == 0) {
+		window['sc'+card+'Inactive'] = 1;
+		$('#sc-label-'+card).css({"color":"gray", "background-color":"#333"});
+		$('#low-player-sc-'+slide+'-'+side).parent().css({'background-color': '#606264 !important'});
+		$('#lp'+slide+'-'+side).text('Status: Inactive');
+	} else {
+		window['sc'+card+'Inactive'] = 0;
+		$('#sc-label-'+card).css({"color":"#fff", "background-color": cssArray[card-1]});
+		$('#low-player-sc-'+slide+'-'+side).parent().css({'background-color': cssArray[card-1]});
+		$('#lp'+slide+'-'+side).text('Status: Active');
+	}
+}
+
+function lowPlayerPass(values) {
+	var lcard = window['pass_L'+values.data.slide].lcard;
+	var rcard = window['pass_L'+values.data.slide].rcard;
+
+	if (eval('(sc'+lcard+'Inactive) == 0 || (sc'+rcard+'Inactive) == 0')) {
+		$('#sc-not-played').show();
+		$('#pass-close').show();
+		$('#pass-confirm-message').hide();
+		$('#pass-cancel').hide();
+		$('#pass-activate').hide();
+		$('#passConfirmLabel').text("Attention");
+	} else {
+		$('#sc-not-played').hide();
+		$('#pass-close').hide();
+		$('#pass-confirm-message').show();
+		$('#pass-cancel').show();
+		$('#pass-activate').show();	
+		$('#passConfirmLabel').text("Confirm");
+	}
+
+	$('#passConfirm').modal({show:true});
+
+	$('#pass-activate').click({slide: values.data.slide, lcard: lcard, rcard: rcard}, lowPlayerPassConfirmed);
+}
+
+function lowPlayerPassConfirmed(values) {
+	$('#pass-indicator-'+values.data.slide).remove()
+	$('#turnTracker').carousel('next');
+	
+	passCard1 = draggablePlayerPosition[values.data.lcard-1];
+	passCard2 = draggablePlayerPosition[values.data.rcard-1];
+
+	$('#'+passCard1).addClass('passed-player');
+	$('#'+passCard2).addClass('passed-player');
+	
+	setTimeout(function() {
+		lowPlayerRemoveSlide(values.data.slide);
+	}, 1500);
+}
+
+function lowPlayerRemoveSlide(slide) {
+	$('#tracker-card-'+slide).remove()
+
+	// Get how many slides remain
+	var totalItems = $('#turnTracker .item').length;
+	if (totalItems <= 1) {
+		$('#tracker-left-nav').hide();
+		$('#tracker-right-nav').hide();
+	}
+
+	if (totalItems == 0) {
+		$('#new-game-round').show();
+	}
+
 }
 
 
