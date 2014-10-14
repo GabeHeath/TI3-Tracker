@@ -113,6 +113,11 @@ $(document).ready(function() {
 		// Store strategy card carousel index here
 		var scards = [sc1, sc2, sc3, sc4, sc5, sc6, sc7, sc8];
 
+
+		// Store Turn Tracker variables
+		var ttracker = [round, roundStarted, newRoundReload];
+		console.log('save-js: '+ttracker);
+
 			// Returns successful data submission message when the entered information is stored in database.
 			$.post(
 				"php/save-data.php", {
@@ -135,6 +140,7 @@ $(document).ready(function() {
 					s41: setting[40], s42: setting[41], s43: setting[42], s44: setting[43], s45: setting[44],
 					s46: setting[45], s47: setting[46], sc1: scards[0], sc2: scards[1], sc3: scards[2],
 					sc4: scards[3], sc5: scards[4], sc6: scards[5], sc7: scards[6], sc8: scards[7],
+					tt1: ttracker[0], tt2: ttracker[1], tt3: ttracker[2]
 				}, function(data) {
 				console.log(data);
 					if (data == "success") {
@@ -145,7 +151,11 @@ $(document).ready(function() {
 				})
 			  	.done(function() {
 			  		dragPosition();
-			    	//alert( "second success" );
+
+			    	if (newRoundReload == true) {
+			    		var url = 'http://localhost/tracker/tracker.html?round_'+round;
+						window.location.replace(url);
+			    	}
 			  	})
 			  	.fail( function(xhr, textStatus, errorThrown) {
         			//alert('Error: ' + xhr.responseText);

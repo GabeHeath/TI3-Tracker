@@ -8,6 +8,8 @@ $(document).ready(function() {
         renderExpansionContent() // Toggles items depending on expansions enabled. I had to put it here because it was trying to run
                                  // the javascript before this GET was done rendering the html.
         setSettings(data.settings_data); //Grabs all settings from database and sets them. Modules, Strategy Cards, diabled races, and expanisions.
+        setTurnTrackerSettings(data.turn_tracker_data);// Grabs all setting from turn tracker table.
+        console.log('loadjs: '+data.turn_tracker_data);
     }).done(function() {
             //alert( "second success" );
             if (counter >= 8) {

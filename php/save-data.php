@@ -39,6 +39,11 @@
 		${"sc{$i}"} = $_POST['sc'.$i.''];
 	}
 
+// Get turn tracker variables
+	for ($i=1; $i<=3; $i++) {
+		${"tt{$i}"} = $_POST['tt'.$i.''];
+	}
+
 
 	$query_player_1 = mysql_query("UPDATE players SET color = '$c1', name = '$n1', race = '$r1' where player = 1 AND game = 1"); //Insert query
 	$query_player_2 = mysql_query("UPDATE players SET color = '$c2', name = '$n2', race = '$r2' where player = 2 AND game = 1");
@@ -63,8 +68,10 @@
 	nekro_disabled = $s46, lazax_disabled = $s47, strategy_card_1 = $sc1, strategy_card_2 = $sc2, strategy_card_3 = $sc3,
 	strategy_card_4 = $sc4, strategy_card_5 = $sc5, strategy_card_6 = $sc6, strategy_card_7 = $sc7, strategy_card_8 = $sc8 WHERE game = 1");
 
+	$query_player_10 = mysql_query("UPDATE turn_tracker SET round = $tt1, round_started = $tt2, new_round_reload = $tt3 WHERE game = 1");
+
 //If all queries are true echo success. save-data.js post looks for sucess response and alerts user of successful save.
-	for ($i=1, $j=1; $i <= 9; $i ++) {
+	for ($i=1, $j=1; $i <= 10; $i ++) {
 		if(${"query_player_{$i}"}){
 	 		$j++;
 		}
