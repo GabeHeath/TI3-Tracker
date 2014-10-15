@@ -9,7 +9,7 @@ $(document).ready(function() {
                                  // the javascript before this GET was done rendering the html.
         setSettings(data.settings_data); //Grabs all settings from database and sets them. Modules, Strategy Cards, diabled races, and expanisions.
         setTurnTrackerSettings(data.turn_tracker_data);// Grabs all setting from turn tracker table.
-        console.log('loadjs: '+data.turn_tracker_data);
+        setVPData(data.vp_tracker_data); //Grabs all Victory Point data from victory_point-tracker table
     }).done(function() {
             //alert( "second success" );
             if (counter >= 8) {

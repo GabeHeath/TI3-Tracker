@@ -1,7 +1,7 @@
+If 10VPs <you win modal>
+
+
 Turn tracker todo:
-
-
-Rework 3-4 players so the order goes from the lowest SC and loops. Trim to 3 or 4 slides with information for both SC's chosen.
 
 create restore slides function for new round.
 

@@ -116,7 +116,11 @@ $(document).ready(function() {
 
 		// Store Turn Tracker variables
 		var ttracker = [round, roundStarted, newRoundReload];
-		console.log('save-js: '+ttracker);
+
+
+		// Store Victory Point Tracker Arrays
+		var vptracker = [vpPlayer1Scores, vpPlayer2Scores, vpPlayer3Scores, vpPlayer4Scores, vpPlayer5Scores, vpPlayer6Scores, vpPlayer7Scores, vpPlayer8Scores];
+		console.log('save-js: '+vptracker);
 
 			// Returns successful data submission message when the entered information is stored in database.
 			$.post(
@@ -140,7 +144,9 @@ $(document).ready(function() {
 					s41: setting[40], s42: setting[41], s43: setting[42], s44: setting[43], s45: setting[44],
 					s46: setting[45], s47: setting[46], sc1: scards[0], sc2: scards[1], sc3: scards[2],
 					sc4: scards[3], sc5: scards[4], sc6: scards[5], sc7: scards[6], sc8: scards[7],
-					tt1: ttracker[0], tt2: ttracker[1], tt3: ttracker[2]
+					tt1: ttracker[0], tt2: ttracker[1], tt3: ttracker[2],
+					vp1: vptracker[0], vp2: vptracker[1], vp3: vptracker[2], vp4: vptracker[3], vp5: vptracker[4],
+					vp6: vptracker[5], vp7: vptracker[6], vp8: vptracker[7]
 				}, function(data) {
 				console.log(data);
 					if (data == "success") {

@@ -1,3 +1,43 @@
+#chart-toggle{
+    position: absolute;
+    bottom: 275px;
+    right: 5px;
+}
+
+.vp-race {
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+div[id*='vp-up-']{
+    margin-left: -3px;
+}
+
+.vp-setters:hover {
+    cursor: pointer;
+    color: rgb(189, 189, 189);;
+}
+
+.vp-tracker-control {
+    display:none;
+    width: 12.5%;
+    height:130px;
+    background-color:#333;
+    float: left;
+    border-right: 1px solid gray;
+    color: gray;
+    text-align: center;
+    font-size: 18px;
+      -webkit-user-select: none; /* Chrome/Safari */        
+-moz-user-select: none; /* Firefox */
+-ms-user-select: none; /* IE10+ */
+}
+
+.vp-tracker-control:hover {
+    background-color:#3F3F3F;;
+}
+
+
 #new-game-round {
     display:none;
     background-color: #333;

@@ -47,7 +47,6 @@ var passSlideChoices = [];
 
 
 function setTurnTrackerSettings(data) {
-	console.log('loadurl: '+data);
 	round = parseInt(data[2]);
 	roundStarted = parseInt(data[3]);
 	newRoundReload = parseInt(data[4]);
@@ -631,6 +630,7 @@ function removeSlide(slide) {
 
 	if (totalItems == 0) {
 		$('#new-game-round').show();
+		$('#victory-track-tab').trigger('click');
 	}
 
 }
@@ -904,6 +904,7 @@ function lowPlayerRemoveSlide(slide) {
 
 	if (totalItems == 0) {
 		$('#new-game-round').show();
+		$('#victory-track-tab').trigger('click');
 	}
 
 }
@@ -1022,11 +1023,6 @@ function lowPlayerNaaluSetup() {
 		temp1 = lowPlayerSortedSlideChoices.shift();
 		temp2 = lowPlayerSortedSlideChoices.shift();
 
-		console.log('t1: '+temp1);
-		console.log('t2: '+temp2);
-		console.log('to: '+lowPlayerTurnOrder);
-		console.log((jQuery).inArray(naaluPlayer.player,lowPlayerTurnOrder));
-
 
 		if (i != ((jQuery).inArray(naaluPlayer.player,lowPlayerTurnOrder)+1)) {
 			$('#low-player-sc-'+i+'-1').text($('#myCarousel-'+temp1+' > div > div.item.active > div > h3').text());
@@ -1071,14 +1067,29 @@ function lowPlayerNaaluSetup() {
 
 
 function newRoundReset() {
-	console.log('pre-round'+round);
 	round=round+1;
 	roundStarted = 0;
 	newRoundReload = 1;
 
-	console.log('newR-round: '+round);
-	console.log('newR-roundstarted: '+roundStarted);
-	console.log('newR-round-reload: '+newRoundReload);
+	vpPlayer1Scores.push($('#vp-score-1').text());
+	vpPlayer2Scores.push($('#vp-score-2').text());
+	vpPlayer3Scores.push($('#vp-score-3').text());
+	vpPlayer4Scores.push($('#vp-score-4').text());
+	vpPlayer5Scores.push($('#vp-score-5').text());
+	vpPlayer6Scores.push($('#vp-score-6').text());
+	vpPlayer7Scores.push($('#vp-score-7').text());
+	vpPlayer8Scores.push($('#vp-score-8').text());
+
+	console.log('here');
+	console.log('vp1Array: '+vpPlayer1Scores);
+	console.log('vp2Array: '+vpPlayer2Scores);
+	console.log('vp3Array: '+vpPlayer3Scores);
+	console.log('vp4Array: '+vpPlayer4Scores);
+	console.log('vp5Array: '+vpPlayer5Scores);
+	console.log('vp6Array: '+vpPlayer6Scores);
+	console.log('vp7Array: '+vpPlayer7Scores);
+	console.log('vp8Array: '+vpPlayer8Scores);
+
 
 	$('#save-btn').trigger('click');
 

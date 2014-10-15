@@ -25,6 +25,9 @@
         <script src="javascripts/load-data.js"></script>
         <script src="javascripts/save-data.js"></script>
         <script src="javascripts/settings.js"></script>
+        <script src="http://code.highcharts.com/stock/highstock.js"></script>
+        <script src="javascripts/victory-track.js"></script>
+
         <!--[if lt IE 9]>
             <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
@@ -36,6 +39,9 @@
 
             </li>
             <li><a id="tracker-tab" href="#turn-tracker" data-toggle="tab"><b>Turn Tracker</b></a>
+
+            </li>
+            <li><a id="victory-track-tab" href="#victory-track" data-toggle="tab"><b>Victory Track</b></a>
 
             </li>
             <li><a href="#messages" data-toggle="tab"><b>Technology</b></a>
@@ -356,6 +362,11 @@ text-align: center; display:none;" class="modal-body">
 
 <div id="new-game-round">
   Start New Round?
+  <div style="font-size: 10px;
+position: absolute;
+text-align: center;
+width: 35%;
+color: gray;">Do not click Start until you have tracked Victory Points.</div>
   <button id="start-new-round-btn" style="margin-top: 30px;
 font-size: 20px;" id="start-new-round" class="btn btn-block btn-primary">Start</button>
 </div>
@@ -363,6 +374,114 @@ font-size: 20px;" id="start-new-round" class="btn btn-block btn-primary">Start</
 
 
             </div>
+
+
+
+
+
+
+             <div id="victory-track" class="tab-pane">
+
+
+              <div id="container" style="height: 75%; min-width: 100%"></div>
+              <button id="chart-toggle" class="btn btn-xs btn-primary">Go to: Spline</button>
+
+<div style="position:absolute; bottom:0; width:100%;background-color: #333;">
+              <div id="vp-tracker-player-1" class="vp-tracker-control">
+                <div id="vp-name-1"></div>
+                <div>
+                  <div id="vp-up-1" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-1">0</div>
+                  <div id="vp-down-1" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-1" class="vp-race"></div>
+              </div>
+
+              <div id="vp-tracker-player-2" class="vp-tracker-control">
+                <div id="vp-name-2"></div>
+                <div>
+                  <div id="vp-up-2" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-2">0</div>
+                  <div id="vp-down-2" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-2" class="vp-race"></div>
+              </div>
+
+              <div id="vp-tracker-player-3" class="vp-tracker-control">
+                <div id="vp-name-3"></div>
+                <div>
+                  <div id="vp-up-3" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-3">0</div>
+                  <div id="vp-down-3" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-3" class="vp-race"></div>
+              </div>
+
+              <div id="vp-tracker-player-4" class="vp-tracker-control">
+                <div id="vp-name-4"></div>
+                <div>
+                  <div id="vp-up-4" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-4">0</div>
+                  <div id="vp-down-4" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-4" class="vp-race"></div>
+              </div>
+
+              <div id="vp-tracker-player-5" class="vp-tracker-control">
+                <div id="vp-name-5"></div>
+                <div>
+                  <div id="vp-up-5" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-5">0</div>
+                  <div id="vp-down-5" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-5" class="vp-race"></div>
+              </div>
+
+              <div id="vp-tracker-player-6" class="vp-tracker-control">
+                <div id="vp-name-6"></div>
+                <div>
+                  <div id="vp-up-6" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-6">0</div>
+                  <div id="vp-down-6" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-6" class="vp-race"></div>
+              </div>
+
+              <div id="vp-tracker-player-7" class="vp-tracker-control">
+                <div id="vp-name-7"></div>
+                <div>
+                  <div id="vp-up-7" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-7">0</div>
+                  <div id="vp-down-7" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-7" class="vp-race"></div>
+              </div>
+
+              <div id="vp-tracker-player-8" class="vp-tracker-control">
+                <div id="vp-name-8"></div>
+                <div>
+                  <div id="vp-up-8" class="glyphicon glyphicon-arrow-up vp-setters"></div>
+                  <div id="vp-score-8">0</div>
+                  <div id="vp-down-8" class="glyphicon glyphicon-arrow-down vp-setters"></div>
+                </div>
+                <div id="vp-race-8" class="vp-race"></div>
+              </div>
+            </div>
+
+
+
+
+             </div>
+
+
+
+
+
+
+
+
+
+
 
 
 

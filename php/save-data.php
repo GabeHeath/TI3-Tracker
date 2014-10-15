@@ -44,6 +44,11 @@
 		${"tt{$i}"} = $_POST['tt'.$i.''];
 	}
 
+// Get victory point tracker arrays
+	for ($i=1; $i<=8; $i++) {
+		${"vp{$i}"} = serialize($_POST['vp'.$i.'']);
+	}
+
 
 	$query_player_1 = mysql_query("UPDATE players SET color = '$c1', name = '$n1', race = '$r1' where player = 1 AND game = 1"); //Insert query
 	$query_player_2 = mysql_query("UPDATE players SET color = '$c2', name = '$n2', race = '$r2' where player = 2 AND game = 1");
@@ -70,8 +75,12 @@
 
 	$query_player_10 = mysql_query("UPDATE turn_tracker SET round = $tt1, round_started = $tt2, new_round_reload = $tt3 WHERE game = 1");
 
+	$query_player_11 = mysql_query("UPDATE victory_point_tracker SET player_1_vps = '$vp1', player_2_vps = '$vp2', player_3_vps = '$vp3',
+	player_4_vps = '$vp4', player_5_vps = '$vp5', player_6_vps = '$vp6', player_7_vps = '$vp7', player_8_vps = '$vp8' WHERE game = 1");
+
+
 //If all queries are true echo success. save-data.js post looks for sucess response and alerts user of successful save.
-	for ($i=1, $j=1; $i <= 10; $i ++) {
+	for ($i=1, $j=1; $i <= 11; $i ++) {
 		if(${"query_player_{$i}"}){
 	 		$j++;
 		}

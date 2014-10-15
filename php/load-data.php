@@ -18,6 +18,8 @@
 
 	$load_turn_tracker = mysql_query("SELECT * FROM turn_tracker WHERE game = 1");
 
+	$load_vp_tracker = mysql_query("SELECT * FROM victory_point_tracker WHERE game = 1");
+
 
 	// Begin: Make a string of 1's and 0's to signify if the columns of a player are all blank. Then find
 	// the last non-empty row. This shows how many rows to add if the page is reloaded.
@@ -68,12 +70,18 @@
 
 	$turn_tracker_data = mysql_fetch_row($load_turn_tracker);
 
+	// Get the serialized arrays from vp_tracker_table
+	$temp_vp_tracker_data = mysql_fetch_row($load_vp_tracker);
+	//Unserialize each array
+	$vp_tracker_data = [unserialize($temp_vp_tracker_data[2]), unserialize($temp_vp_tracker_data[3]), unserialize($temp_vp_tracker_data[4]),
+	unserialize($temp_vp_tracker_data[5]),unserialize($temp_vp_tracker_data[6]),unserialize($temp_vp_tracker_data[7]), unserialize($temp_vp_tracker_data[8]), unserialize($temp_vp_tracker_data[9])];
+
 
 
 
 	
 
-	echo json_encode(array("html_output" => $html_output, "player_data" => $player_data, "counter_value" => $num_rows_to_load, "settings_data" => $settings_data, "turn_tracker_data" => $turn_tracker_data));
+	echo json_encode(array("html_output" => $html_output, "player_data" => $player_data, "counter_value" => $num_rows_to_load, "settings_data" => $settings_data, "turn_tracker_data" => $turn_tracker_data, "vp_tracker_data" => $vp_tracker_data));
 
 	mysql_close($connection); // Connection Closed.
     
